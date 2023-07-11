@@ -1,0 +1,13 @@
+
+
+Systems Manager
+It will host the various parametes of your application, for eg. the DB's password
+
+
+Questions:
+Q1: Does the EBS and root volumes also get included when creating an AMI from an ec2 Instance?
+Answer: When creating an Amazon Machine Image (AMI) from an EC2 instance, by default, both the EBS volumes and the root volume are included in the created AMI.
+
+An AMI is a snapshot of the entire state of an EC2 instance, including the operating system, applications, data, and any attached EBS volumes. When you create an AMI, it captures the contents of all the attached EBS volumes, including the root volume.
+
+This means that when you launch a new EC2 instance from the created AMI, it will have an identical configuration, including all the EBS volumes and the root volume as they were at the time the AMI was created.

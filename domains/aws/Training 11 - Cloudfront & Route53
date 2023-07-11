@@ -1,0 +1,15 @@
+
+Cloudfront
+- is a Content Delivery Network (CDN)
+- It improves content delivery performance by caching content in edge locations worldwide.
+- Has a global network of edge locations strategically placed across regions and countries.
+- Edge locations act as caching endpoints, storing copies of content closer to end-users.
+- CloudFront automatically routes user requests to the nearest edge location for faster delivery.
+- The edge locations are distributed globally, covering major cities and regions worldwide.
+- CloudFront can retrieve content from various origin servers hosted within or outside of AWS.
+- It enhances content delivery by reducing latency and improving scalability and availability.
+
+
+Amazon Elastic Transcoder
+- Use Amazon Elastic Transcoder pipeline to transcode different qualities of a Video
+- In Amazon Elastic Transcoder, create a pipiline pointing to an S3, there create a Job

@@ -1,0 +1,13 @@
+
+Security Group Client ID (ID of the ec2 instance): sg-0110790f40dc05661
+
+ips -- public:3.232.191.160, private:10.0.1.155
+
+mount command:
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-0fefb4faddc367e2c.efs.us-east-1.amazonaws.com:/ efs
+
+Show details command:
+sudo df -hT
+
+Examine the write performance characteristics of your file system by entering the command:
+sudo fio --name=fio-efs --filesize=10G --filename=./efs/fio-efs-test.img --bs=1M --nrfiles=1 --direct=1 --sync=0 --rw=write --iodepth=200 --ioengine=libaio

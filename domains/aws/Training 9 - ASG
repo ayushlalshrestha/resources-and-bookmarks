@@ -1,0 +1,33 @@
+ASG - Automatic Scaling Group
+
+Automatically register the new instances to the LoadBalancer.
+
+ASGs have the following attributes:
+- AMI + Instance types
+- EC2 user data
+- EBS Volumes
+- Security Groups
+- SSH Key pairs
+- Network & Subnets information
+- Min/Max size
+- LoadBalancer information
+- Scaling policies
+
+
+Auto Scaling by:
+- Alarms - It is possible to scale ASGs based on CloudWatch alarms.
+- Auto Scaling through custom metrics.
+
+If the application is expected to receive varying loads of traffic, you can also create scaling policies that define when to launch or terminate instances. However, you do not need to create scaling policies for the Inventory application in this lab.
+
+
+
+Types of Scaling:
+- Scheduled Scaling
+- Maetric based scaling
+- Predictive scaling
+
+
+Notes:
+- IAM roles attached to an ASG will get assigned to the ec2 instances.
+- Create lifecycle hooks to run pre-delete scripts, logic.

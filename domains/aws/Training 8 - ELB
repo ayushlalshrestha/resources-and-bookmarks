@@ -1,0 +1,27 @@
+
+
+Register instances in a LoadBalancer
+
+ALB - Application load balancers
+- Can redirect to multiple applications across machines (target groups)
+- Can redirect to multiple appications (containers) on the same machine
+- Target group represents a cluster of compute instances for a single functionality to route the requests to, for eg. :
+    - ec2 instances (can be managed by ASGs)
+    - ecs tasks
+    - Lambda functions
+    - IP Addresses (must be private)
+- Stickiness in target group defines whether to set a cookie to always route requests from the same client to the same instance in a target group. 
+- Routing tables to different target groups by defining listeners:
+    - Based on the path in the URL
+    - Based on hostname of the URL
+    - Based on some query paramter, header of the request
+- Has a port mapping feature to redirect to a dynamic port in ECS
+
+
+NLB - Network load balancers
+- Forward TCP & UDP traffic to your instances
+- Low latency (handle millions of MPS)
+- NLB has 1 static IP per AZ
+
+
+In ec2 security group, you can only allow access to the ec2 from the security group of an ELB

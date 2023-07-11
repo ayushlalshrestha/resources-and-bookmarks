@@ -1,0 +1,33 @@
+
+What is RDS:
+- Automated provisioning, OS Patches
+- Continuous backups and restore to specific timestamps
+- Read replicas for improved read performances.
+- Multi AZ setup of Disaster recovery
+- Scaling capabilities (vertical & horizontal)
+- Storage backed by EBS (gp2 or io1)
+- supports vertical scaling (storage auto scaling) vs. horizontal scaling (with read replicas)
+- storage backend by EBS
+
+Automated backups:
+- Daily full backups during the maintanence window
+- Transactional logs are backed up every 5 minutes
+- 7 days retention by default
+
+Read Replication:
+- Upto 5 read replicas
+- Within AZ, cross AZ or cross region
+- Replication is asynchronous hence only eventually consistent
+- Read Replicas can be converted to their own DB
+- Read replicas across region will cost $$
+
+Multi AZ replication for Disaster replication:
+- Synchronous replication hence always consistent (Master & StandBy)
+- Consistency comes at a cost of Availability
+- One DNS name - automatic app failaover to standby
+- Read replicas can be setup as Multi AZ replicas too
+
+When creating an RDS, the paramaters are stored in the Parameters store of Systems manager.
+
+Any ec2 application should access the parameters from the parameters store 
+for which it requires accurate access through IAM Role & policies.

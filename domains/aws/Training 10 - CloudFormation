@@ -1,0 +1,24 @@
+
+AWS CloudFormation:
+- create stacks from templates
+- access resources from other stack to another stack, the source stack must export the resource
+- seperate stacks as per their functionality
+
+Template rules:
+- Resources: Define the resources to create in your AWS stack
+    - Resource type identifier are of form: AWS::aws-product-name::data-type-name
+- Outputs: reference to what has been created
+- Conditionals: list of conditions to perform resource creation
+    - Fn::(And|Equals|If|Not|Or)
+- Parameters: Way to provide re-useable inputs
+
+
+AWS Systems Manager:
+- Manage systems
+- Patch Management
+- Parameter Store
+
+
+Links:
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+- https://github.com/aws-quickstart/quickstart-amazon-aurora-postgresql/blob/main/templates/aurora_postgres-main.template.yaml

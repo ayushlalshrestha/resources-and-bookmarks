@@ -1,0 +1,13 @@
+
+Security Groups: Definition of firewall rules
+
+Instance types and Naming conventions:
+- T & M for general purpose
+- C for compute
+- R for Memory
+- I & D for storage optimized
+
+Notes:
+- Processor, memory & storage can be added and removed.
+- https://www.ec2instances.info  
+- Elastic IPs can be used to assign static Public IPs to your ec2 cluster.

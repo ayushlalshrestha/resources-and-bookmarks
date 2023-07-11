@@ -1,0 +1,33 @@
+
+
+VPC (Virtual Private cloud)
+    - A VPC can extend across an entire AWS Region (regional resource)
+
+Subnets - Dividing the VPC (Availability zone resource)
+
+Attach public gateway to a VPC and route table, attach the routetable to a subnet.
+
+`ssh -A` option to propagate local keys to other server.
+
+Use Elastic IP service to have a static IP address.
+
+NACL
+- Network Level Access control that is attached to subnet.
+- Create NACLs and attch them to subnets.
+
+
+NAT Gateway 
+- Way to give internet access to private subnets.
+- Attach a NAT Gateway in a subnet with Internet gateway and route 0.0.0.0/0 destinations from a subnet with no internet access to the NAT Gateway of the 1st subnet, which will expose internet outbound access from the 2nd subnet. 
+
+An ec2 instance, once deployed cannot be switched to another subnet.
+A subnet once configured in an Availability zone, cannot be migrated to another zone.
+
+
+--- 
+
+VPC pairing to connect 2 different regions (2 different VPCs) by creating a `Peering connection` and including it in the route tables of the VPCs.
+
+Site to Site VPN: Connect your on-prem network to your VPC
+
+Transit gateways make it easy to have peering between a lot of VPCs.

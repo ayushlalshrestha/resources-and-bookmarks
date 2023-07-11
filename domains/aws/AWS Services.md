@@ -1,7 +1,7 @@
 Amazon services:
 
 1. EC2 - Virtual computer instance to host an application
-2. Elastic Load Balancing - Distribute traffic to multiple instances
+2. Elastic Load Balancing - Distribute traffic to multiple instances eg. from the data collected from cloudwatch
 3. Auto Scaling - Define policies to create new instances
 4. Cloud Watch - collect logs from each instance of application server
 5. Lambda
@@ -11,6 +11,7 @@ Amazon services:
 8. Elastic kubernetes service
 9. Fargate - container behave like a servlerless function. removes the need to allocate ec2 instances for your containers
 10. App runner - deploy your pre-existing containers while it handles all the orchestration & scaling behind the scenes
+10. Service discovery
 
 11. S3 & Glacier
 12. Block Storage - Fast storage
@@ -30,6 +31,7 @@ Amazon services:
 25. apache kafka - MSK
 
 26. IAM 
+27. Cognito
 27. SNS - Simple notification system
 
 28. Cloud formation - create template for your infrastructure - enable 100s of different services

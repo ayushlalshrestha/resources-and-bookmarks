@@ -1,0 +1,48 @@
+Amazon Simple Storage Service
+- Buckets & Objects.
+- Object have a key & the key is the full path (prefix + object_name).
+- query in place.
+- Amazon Athena can be used to query unstructured data in S3.
+- S3 objects can be versioned.
+- Amazon Glacier can be used to archive old data.
+- Amazon S3 transfer acceleration
+- Use Cloudfront as proxy to cache s3 access
+
+How is authentication and authorization handled when a program accesses an S3 object?
+Ans: It is also controlled through IAM
+
+
+
+Challenges:
+- Hosting a static website using s3 bucket
+- Changing permissions on a bucket through policy defined in JSON
+- setting lifecycle policy for the current version and older versions
+- setting replication for a bucket
+
+
+
+Example Permission policy for an S3 bucket
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Statement1",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "s3:Get*",
+                "s3:List*"
+            ],
+            "Resource": "arn:aws:s3:::website-229-replica-1/*"
+        },
+        {
+            "Sid": "Statement1",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetBucketObjectLockConfiguration",
+            "Resource": "arn:aws:s3:::website-229-replica-1"
+        }
+    ]
+}
+```
