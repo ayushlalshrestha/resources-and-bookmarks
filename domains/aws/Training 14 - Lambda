@@ -1,0 +1,11 @@
+
+AWS Lambda:
+- Make a Lambda function
+- Make an API Gateway
+- Route an API in the API Gateway to a Lambda function
+- Throw dependent packages to "lambda layers"
+
+API Gateway:
+- Central reverse proxy to route requests
+
+AWS Step Funtions:

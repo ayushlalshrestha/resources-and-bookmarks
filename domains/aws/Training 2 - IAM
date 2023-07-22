@@ -1,7 +1,7 @@
 
-IAM, Policies, Roles in AWS:
-- Roles are like usergroups to assign to resources
-- IAM Policies is where we define permissions in JSON format.
+IAM Policies
+- Definition of permission rules (json).
+- Define `effects` (allow/deny) on `actions` that are performed on aws `resources` by different `principals`
 - example of an Policy definition:
   ```
   {
@@ -18,13 +18,13 @@ IAM, Policies, Roles in AWS:
 
 - When IAM determines permissions, an explicit Deny will always override any Allow statement.
 - `Conditions` define the condition to apply the policy.
-- AWS managed policies  are provided & updated by AWS.
+- AWS managed policies are provided & updated by AWS automatically.
 
 
 IAM Roles:
-- Set of permissions that can be attached to an AWS resource so that it access other resources.
+- Set of permissions that can be attached to an AWS resource so that it can access other resources.
 - Some AWS services will need to perform actions on your behalf.
-- Trust policy of a Role defines which services can assume a Role.
+- Trust policy of a `Role` defines which services can assume the `Role``.
 - Trusted entities (In Roles) = Entities that can assume this role under specified conditions.
 - Roles can only be passed to what their trust allows.
 

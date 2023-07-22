@@ -1,33 +1,46 @@
 
 What is RDS:
-- Automated provisioning, OS Patches
-- Continuous backups and restore to specific timestamps
+- Managed database service for MySQL, Postgresql, Oracle, etc.
+- Automated provisioning, OS Patches.
+- Continuous backups and restore to specific timestamps.
 - Read replicas for improved read performances.
-- Multi AZ setup of Disaster recovery
-- Scaling capabilities (vertical & horizontal)
-- Storage backed by EBS (gp2 or io1)
-- supports vertical scaling (storage auto scaling) vs. horizontal scaling (with read replicas)
-- storage backend by EBS
+- Multi AZ setup of Disaster recovery.
+- Storage backed by EBS (gp2 or io1).
+- Supports vertical scaling (storage auto scaling) vs. horizontal scaling (with read replicas)/
 
 Automated backups:
-- Daily full backups during the maintanence window
-- Transactional logs are backed up every 5 minutes
-- 7 days retention by default
+- Daily full backups during scheduled maintenance window.
+- Transactional logs are backed up every 5 minutes.
+- 7 days retention by default.
 
 Read Replication:
-- Upto 5 read replicas
-- Within AZ, cross AZ or cross region
-- Replication is asynchronous hence only eventually consistent
-- Read Replicas can be converted to their own DB
-- Read replicas across region will cost $$
+- Improve read performance by making exact copy of your database.
+- Replication is asynchronous hence only eventually consistent.
+- Upto 5 read replicas.
+- Within AZ, cross AZ or cross region.
+- Each read replica has a DNS.
+- Read Replicas can be converted to their own DB.
+- Read replicas across region will cost $$.
+- Automatic backups must be enabled to deploy a read replica.
 
 Multi AZ replication for Disaster replication:
-- Synchronous replication hence always consistent (Master & StandBy)
-- Consistency comes at a cost of Availability
-- One DNS name - automatic app failaover to standby
-- Read replicas can be setup as Multi AZ replicas too
+- Synchronous replication hence always consistent (Master & StandBy).
+- One DNS name - automatic app failaover to standby.
+- Consistency comes at a cost of Availability.
+- Read replicas can be setup as Multi AZ replicas too.
+- Multi AZ is for disaster recovery & not for performance.
 
-When creating an RDS, the paramaters are stored in the Parameters store of Systems manager.
-
-Any ec2 application should access the parameters from the parameters store 
+Notes:
+- When creating an RDS, the paramaters are stored in the Parameters store of Systems manager.
+- Any ec2 application should access the parameters from the parameters store 
 for which it requires accurate access through IAM Role & policies.
+
+AWS Database Migration Service (DMS):
+- Homogeneous migration
+- Hetergenous migration
+- AWS Schema conversion tool (SCT): Change DB engine type between source & target.
+    - create a target DB
+    - migrate the DB schema
+    - setup the data replication process
+    - initiate the data transfer & confirm completion
+    - switch production to the new DB

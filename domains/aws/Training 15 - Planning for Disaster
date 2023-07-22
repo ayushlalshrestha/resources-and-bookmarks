@@ -1,0 +1,7 @@
+
+
+Disaster recovery
+- Recovery point objective (RPO): Maximum data loss in time.
+- Recovery time objective (RTO): When will the systems be up.
+
+

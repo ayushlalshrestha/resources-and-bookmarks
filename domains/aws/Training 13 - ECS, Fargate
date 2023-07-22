@@ -1,0 +1,56 @@
+
+ECS:
+- Orchestrates when containers run.
+- Maintains and scales fleets of instances.
+- Region specific.
+- ECS Launch types:
+    1. Fargate launch types
+    2. EC2 launch types
+- Autoscaling group for autoscale of ECS containers.
+- ECS Clusters
+    - ECS clusters are logical grouping of ec2 instances.
+    - Define the underlying system to run containers (Use ECS Optimized AMIs).
+    - The ECS agent registers the instance to the ECS cluster.
+    - The cluster that the ec2 is part of is defined in `/etc/ecs/ecs.config` file.
+    - Each cluster is associated with ASG if it is an EC2 based cluster.
+    - Fargate based clusters scale automatically.
+- Task definition
+    - acts as docker-compose.
+    - metadata defining how to run a docker container
+    - A task can have an IAM role.
+    - Select Images, Configure Volumes, port mapping, etc.
+    - EFS can also be mounted to the container.
+- Service definition
+    - An ECS service enables you to simultaneously run and maintain a specified number of task definition instances in an ECS cluster. If one of the tasks fails or stops for any reason, the ECS service scheduler launches another task definition instance to replace it. Thus, it will maintain the desired count of tasks that were specified in the service.
+    - Defines how many tasks should run & how, and in which Cluster.
+    - Connects Tasks with Clusters.
+    - Ensures number of tasks desired is running in the fleet of ec2 instances.
+    - Configure LoadBalancing
+    - Configure service autoscaling for tasks.
+    - Service Target group for ASG target group
+
+
+Fargate:
+- Fully managed container service.
+- Works with ECS & EKS.
+- Provisions, manages and scales your container clusters
+- Do not need autoscaling group
+
+
+Notes:
+- ECS Cluster & Task can either be serverless through Fargate or ec2 based.
+- QUESTION: How do you patch applications deployed in ECS?
+    - Use the latest tag, check the "use latest" options in ECS
+
+
+Microservice architecture with ELB & ASG with ec2 based ECS:
+- Create 1 ELB.
+- Create 1 ASG for the ec2 instances (can also be created while creating the cluster)
+- Create 3 Tasks for 3 different applications (eg. users, posts, threads).
+- Create a Cluster in ECS.
+- Create 3 different target groups in ELB.
+- Create a listener for http:80 in the ELB & create 3 different rules pointing to the 3 different target groups based on the path.
+- Create 3 different services in ECS for each task (app). Attach them to respective target group.
+- Notes:
+    - A container & a route (target group) in the ELB is connected through Service definition.
+    - ECR (Container registry) is used to Build, tag & push images.

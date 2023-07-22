@@ -1,0 +1,57 @@
+AWS Direct Connect
+- It provides a dedicated network connection between an on-premises data center and AWS. It offers a private and consistent network link, enabling faster and more reliable data transfers compared to public internet connections.
+- Uses open standard 802.1q VLANs that enables you to establish a dedicated private network connection from premises to AWS.
+- Direct Connect connections consist of a single connection between your network and AWS with no inherent redundancy. Additionally, traffic coming from on-premises via a Direct Connect connect is restricted from internet access.
+
+
+Site to Site VPN
+- Connect your on-prem network to your VPC.
+- establish a secure and encrypted connection between your on-premises network and your AWS VPC over the internet. It creates an IPsec VPN tunnel that enables secure communication between your on-premises resources and resources within the VPC. This is suitable for scenarios where you have a hardware VPN appliance or a software VPN client on your on-premises network.
+- 2 types of routing:
+    - Static routing: requires you to specify all routes.
+    - Use BGP to advertiseits route to the Virtual Private Gateway.
+- Use CloudHub to connect a VPN from multiple customer gateway devices to a single Virtual Private Gateway
+
+
+AWS DataSync
+- data transfer service designed to simplify and accelerate moving large amounts of data between on-premises storage systems and AWS. 
+- optimizes the transfer process, handles encryption, and supports multiple protocols for seamless integration with existing storage infrastructure. 
+- Similar to Database Migration Service (DMS), used for one-time migrations.
+- You need to deploy a DataSync agent in on-premise.
+
+
+Storage Gateway
+- It is a hybrid cloud storage service that connects on-premises IT environments with AWS storage (Amazon S3 or Amazon Glacier).
+- Acts as a bridge, allowing you to store and retrieve data in AWS while keeping a local cache for low-latency access in on-prem.
+- You need to deploy a Storage gateway agent in on-premise. They could be volume gateway, NFS gateway, etc.
+- Create SMB `file share`, NFS, volume, FSx file share on the Storage gateway in AWS.
+- The on-prem agent will cache or keep all the copy of data and communicate with the storage gateway in AWS.
+
+In summary, AWS Direct Connect focuses on establishing a dedicated network connection between on-premises and AWS, AWS DataSync simplifies and accelerates data transfers, and Storage Gateway enables hybrid cloud storage by seamlessly integrating on-premises storage with AWS cloud storage services.
+
+
+Global Accelerator
+- can reduce the amount of time users spend communicating the public internet, allowing them to hop on to the AWS network at edge locations physically closer to them.
+- Static IP addresses route to endpoints in up to 10 different Regions, allowing for easy Regional failover if one of your endpoints in unresponsive.
+- Your static entry points allow for origin masking and are protected by AWS Shield by default.
+
+
+### AWS VPC Endpoints
+Is a feature in AWS that enable you to privately connect your VPC to supported AWS services and APIs without requiring public internet access. With VPC endpoints, you can access AWS services directly from your VPC without traversing the internet, providing enhanced security and reducing data exposure risks.
+Types of VPC Endpoints:
+1. Gateway Endpoints:
+   - Gateway endpoints are used to connect your VPC to AWS services using an elastic network interface (ENI) as a target. They are used for services powered by AWS PrivateLink, which allows access to supported AWS services via a private IP address in your VPC.
+   - Examples of services accessible through Gateway Endpoints include Amazon S3, Amazon DynamoDB, and Amazon Glacier.
+
+2. Interface Endpoints:
+   - Interface endpoints are used to connect your VPC to AWS services using private IP addresses, just like Gateway Endpoints. However, they support a broader range of services, including services not natively powered by AWS PrivateLink.
+   - Interface Endpoints are powered by AWS PrivateLink, but AWS also allows third-party service providers to create their own VPC endpoint services using AWS PrivateLink.
+   - Examples of services accessible through Interface Endpoints include Amazon Elastic Compute Cloud (EC2), AWS CloudWatch, AWS Systems Manager, and many others.
+
+3. Gateway Load Balancer Endpoints:
+   - Gateway Load Balancer endpoints are used to connect your VPC to AWS services through a Gateway Load Balancer, which enables high availability and redundancy.
+   - These endpoints are used specifically for AWS services that are integrated with Gateway Load Balancer.
+
+Regarding AWS Storage Gateway, it is not a VPC endpoint. AWS Storage Gateway is a hybrid cloud storage service that connects on-premises environments with AWS cloud storage. It does not provide an endpoint for direct access within your VPC. Instead, it operates as a bridge between your on-premises infrastructure and AWS cloud storage services like Amazon S3, Amazon Glacier, and Amazon EBS.
+
+In summary, VPC endpoints are a way to privately access specific AWS services from your VPC without going over the public internet. AWS offers Gateway Endpoints and Interface Endpoints to connect to various services. However, AWS Storage Gateway is not a VPC endpoint; it's a separate service for hybrid cloud storage integration.

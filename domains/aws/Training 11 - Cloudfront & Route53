@@ -11,5 +11,5 @@ Cloudfront
 
 
 Amazon Elastic Transcoder
-- Use Amazon Elastic Transcoder pipeline to transcode different qualities of a Video
-- In Amazon Elastic Transcoder, create a pipiline pointing to an S3, there create a Job
+- Use Amazon Elastic Transcoder pipeline to transcode different qualities of a Video.
+- In Amazon Elastic Transcoder, create a pipeline pointing to an S3, there create a Job.

@@ -1,0 +1,53 @@
+
+Storage Options for ec2 instances:
+
+EBS - Elastic Block Storage
+- Is a Network drive, Network USB stick.
+- Data transfer over network.
+- Can be detached from 1 ec2 & attached to another ec2.
+- Restricted to an availability zone.
+- EBS (SSD variations): General Purpose vs. Provisioned IOPS .
+- EBS (HDD variations): Throughput optimized vs. Cold HDD .
+- Size can be increased (but not decreased). Reconfiguration in ec2 is necessary.
+- ec2 delete_on_termination option
+- Mount to attach a new EBS to an ec2
+
+EBS Snapshots:
+- Setup CloudWatch job to create a snapshot.
+- Recreate a volume in tea new AZ.
+- Snapshot lifecycle manager to create & delete snapshots.
+- Convert an unencrypted EBS volume to an enrypted new volume
+    - create a snapshot of the unencrypted root device volume.
+    - create a copy of the snapshot & select the `encrypt` option
+    - create an AMI from the encrypted snapshot.
+    - use that AMI to launch new encrypted instances.
+
+
+Types of EBS:
+- gp2/gp3 SSD: general purpose balanced price vs. performance SSDs
+- io1/io2 SSD: Highest performance SSD
+- st1 HDD: Low cost high frequency HDD
+- sc1 HDD: Lowest cost low frequency HDD
+
+Instance Storage
+- ephemeral, lose the data once the ec2 instance is stopped
+
+EFS - Elastic File System
+- Network file system that can be mounted on multiple EC2 instances at once.
+- Automatically scaling & backups.
+- use cases: content management, web serving, data sharing.
+- uses NFS v4.1 protocol.
+- EFS is `3 x EBS` and `20 x S3` in costs.
+- AWS DataSync connects On-prem to EFS.
+- AWS Storage gateway - connect On-prem with cloud.
+- Can handle upto 10 Gbps throughput
+- Modes: General purpose vs. Max I/O
+- Lifecycle management
+- Create mount targets that defines interface that the clients can mount on.
+- FSx for windows
+- FSx for Lustre: for HPC applications which store directly to S3
+
+AWS Backup
+- Consolidation: Use AWS Backup to backup AWS services such as ec2, ebs, storage gateway, etc.
+- Organizations: Use AWS Backup with AWS Organizations to backup different services to different accounts.
+
