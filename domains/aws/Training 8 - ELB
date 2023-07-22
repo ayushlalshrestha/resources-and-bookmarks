@@ -5,7 +5,7 @@ Register instances in a LoadBalancer
 ALB - Application load balancers
 - Can redirect to multiple applications across machines (target groups)
 - Can redirect to multiple appications (containers) on the same machine
-- Target group represents a cluster of compute instances for a single functionality to route the requests to, for eg. :
+- Target group represents a cluster of compute instances for a single functionality to route the requests to, for eg.
     - ec2 instances (can be managed by ASGs)
     - ecs tasks
     - Lambda functions

@@ -1,0 +1,6 @@
+
+- service to service authentication
+- Amazon Cognito
+- Amazon STS
+- RBAC and ABAC
+- AWS Organizations: Central management for different AWS accounts

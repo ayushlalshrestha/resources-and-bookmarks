@@ -1,0 +1,25 @@
+Kinesis: Real time streaming of Big data
+
+Kinesis data streams
+- capture, process & store data streams
+- Stream partitioned to different shards (as partitions in different brokers in kafka).
+- A partition key is hashed to point to a shard which stores the message.
+- Partition key in a message from the producer determines which shard the log will be saved to.
+- A record consists of Partition key, sequence number & data blob upto 1MB.
+- Retention: 1 day to 1 year.
+- Maximum of 1000 writes per second in a single shard.
+- Producers: Kinesis Agent, AWS SDK for Java, KPL (kinesis producer library)
+- Consumers: Kinesis data analytics, KCL (kinesis consumer library)
+
+
+Kinesis data firehose
+- load data streams into AWS data store (eg. S3)
+- acts as a store_handler
+
+Kinesis data analytics
+- run standard SQL queries against data streams.
+- take data from sources like data stream, firehose.
+- analyze data streams with SQL or Apache Flink.
+        
+
+Amazon MQ as alternative to RabbitMQ

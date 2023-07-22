@@ -1,0 +1,15 @@
+
+Using STS to assume a Role:
+1. Define an IAM Role (with policies & permissions, etc)
+2. Define which principals can access (assume this IAM Role)
+Define Role Access: Specify which principals (users, groups, or other AWS accounts) are allowed to assume the IAM role, in the trust policy
+3. Call STS's AssumeRoleAPI to impersonate the IAM role you have access to
+4. Use the temporary credentials returned by STS to request the relevant resource
+
+
+Detailed Flow:
+1. Define an IAM Role: Create an IAM role with the necessary policies and permissions that define what actions the role is allowed to perform. This role acts as a set of permissions that can be assumed by trusted entities.
+2. Define Role Access: Specify which principals (users, groups, or other AWS accounts) are allowed to assume the IAM role. This is done by attaching a trust policy to the IAM role, which defines the trusted entities that can assume the role.
+3. Call AssumeRole API: Use the AssumeRole API provided by the AWS STS service to request temporary security credentials for the IAM role. The API call requires the role's ARN (Amazon Resource Name) and optionally any additional parameters like session name or external ID.
+4. Retrieve Temporary Credentials: When the AssumeRole API call is successful, STS returns temporary security credentials, including an access key, secret access key, and session token. These credentials have a limited validity period and can be used to authenticate and authorize requests.
+5. Use Temporary Credentials: With the temporary security credentials obtained from the AssumeRole API response, you can make API calls to AWS services on behalf of the assumed role. These credentials can be used to access resources and perform actions according to the permissions associated with the assumed IAM role.

@@ -1,0 +1,49 @@
+
+Aurora
+- Fully managed RDS service for mysql, postgres.
+- Cross-AZ Master & Read-Replica architecture.
+- Writes go through the `cluster endpoint` to the Main instance.
+- Reads go through the `reader endpoint` to Read-replica through an ELB.
+- Read replication is asynchronous.
+- 5x performance than SQL.
+- Question: Can you make that answer a little shorter? 
+    Answer: If a read request arrives before a newly written row has been propagated to the read replicas in Amazon Aurora, the read request may not immediately see the newly written row due to replication lag.
+
+Aurora features:
+- Upto 15 replicas.
+- Asynchronous replications in milliseconds.
+- 2 copies in atleast 3 AZs are always replicated.
+- Share aurora snapshots with other accounts.
+- 3 types of replicas: aurora replicas, sql & postgres replicas.
+- Automated failover with aurora replicas.
+- Aurora serverless for unpredictable workloads.
+
+
+DynamoDB
+- Managed, multi-AZ NoSQL data store.
+- Has Cross-Region replication option.
+- Single digit millisecond latency.
+- Supports both documents & key-value storage.
+- Defaults to eventual consistency reads but can request strong consistency.
+- Priced on throughput.
+- Encryption at rest using KMS.
+- Stored across 3 different geographically different data centres.
+
+DynamoDB features:
+- Stored in SSDs.
+- DynamoDB transactions: For ACID property (Max 25 items or 4MB).
+- Point in time recovery: Incremental backups each 5 minutes for last 35 days.
+- Dynamo Streams: Time-ordered sequence of item-level changes in a table.
+- Global tables: Multi master mutli region replication (replicaiton latency <1 sec)
+- Dynamo DB Accelerator (DAX)
+    - In-memory cache for dynamo DB.
+    - Reduces request time from milli to micro seconds.
+
+
+
+Other DBs:
+- DocumentDB as an alternative to MongoDB
+- Keyspaces as an alternative to Cassandra
+- Neptune as a graph DB
+- Timestream for time-series DB
+

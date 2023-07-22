@@ -1,13 +1,41 @@
 
 Security Groups: Definition of firewall rules
 
+Types: 
+- On-demand: Pay by the hour
+- Reserved: 
+    - reserved capacity for 1 to 3 years with upto 72% discount.
+    - can be scheduled reserved instance.
+- Spot: purchase unused capacity with upto 90% discount.
+    - Spot Fleets: Collection of spot instances & (optionally) on-demand instances.
+- Dedicated-hosts: A physical ec2 server reserved for you.
+
+
 Instance types and Naming conventions:
 - T & M for general purpose
 - C for compute
 - R for Memory
 - I & D for storage optimized
 
+Placement groups:
+- Cluster: in same AZ for low network latency.
+- Spread: Placed on distinct underlying hardware in different AZ.
+- Partial: Different network & power source in different AZ. Eg. for HBase cluster.
+- You can move instances into a different placement group.
+
+Network types in ec2:
+- ENI: General purpose
+- Elastic Network Adapter: 100Gb/s
+- Elastic Fabric Adapter: For high performance computing (HPC) & machine learning applications. Support OS-bypass.
+
 Notes:
 - Processor, memory & storage can be added and removed.
 - https://www.ec2instances.info  
 - Elastic IPs can be used to assign static Public IPs to your ec2 cluster.
+- AWS Compute Optimizer: Gives configuration recommendation based on usages.
+- All inbounds are denied & all outbounds are allowed by default in a security group.
+- Bootstrap script (*.sh) is provided as user data.
+- ec2 metadata URL can be used to retrieve the information about the instance. Eg. `curl https://169.254.169.254/latest/meta-data/`
+- Use AWS cloud vmware to deploy a vCenter in AWS.
+- AWS Outposts: deploy AWS services in your own premises.
+- If you want to include data from EBS volumes when creating an AMI, you need to take a separate snapshot of the EBS volumes and create a new AMI from those snapshots. This process is called creating a custom AMI.
