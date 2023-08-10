@@ -1,13 +1,12 @@
 
 Aurora
 - Fully managed RDS service for mysql, postgres.
-- Cross-AZ Master & Read-Replica architecture.
+- Cross-AZ Master & Read-Replica architecture (Primary & Aurora replicas).
 - Writes go through the `cluster endpoint` to the Main instance.
 - Reads go through the `reader endpoint` to Read-replica through an ELB.
 - Read replication is asynchronous.
 - 5x performance than SQL.
-- Question: Can you make that answer a little shorter? 
-    Answer: If a read request arrives before a newly written row has been propagated to the read replicas in Amazon Aurora, the read request may not immediately see the newly written row due to replication lag.
+- Note: If a read request arrives before a newly written row has been propagated to the read replicas in Amazon Aurora, the read request may not immediately see the newly written row due to replication lag.
 
 Aurora features:
 - Upto 15 replicas.

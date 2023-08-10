@@ -38,6 +38,7 @@ VPC Peering
 Transit gateways
 - make it easy to have peering between a lot of VPCs.
 - allows for hub-and-spoke networking between VPCs that is easily extensible in the future.
+- eliminates the need for direct VPC-to-VPC peering connections.
 
 
 VPC Endpoints: 

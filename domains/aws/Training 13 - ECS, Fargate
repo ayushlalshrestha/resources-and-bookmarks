@@ -41,7 +41,7 @@ Notes:
 - ECS Cluster & Task can either be serverless through Fargate or ec2 based.
 - QUESTION: How do you patch applications deployed in ECS?
     - Use the latest tag, check the "use latest" options in ECS
-
+- Cluster autoscaling gives more control over how tasks are scaled in a cluster.
 
 Microservice architecture with ELB & ASG with ec2 based ECS:
 - Create 1 ELB.

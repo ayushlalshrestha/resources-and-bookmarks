@@ -1,16 +1,20 @@
 
 AWS CloudFormation:
-- create stacks from templates
-- access resources from other stack to another stack, the source stack must export the resource
-- seperate stacks as per their functionality
+- create stacks from templates.
+- access resources from other stacks to a stack, the source stack must export the resource.
+- seperate stacks as per their functionality.
 
 Template rules:
-- Resources: Define the resources to create in your AWS stack
-    - Resource type identifier are of form: AWS::aws-product-name::data-type-name
+- Resources: Define the resources to create in your AWS stack.
+    - Resource type identifier are of form: `AWS::aws-product-name::data-type-name`
 - Outputs: reference to what has been created
-- Conditionals: list of conditions to perform resource creation
-    - Fn::(And|Equals|If|Not|Or)
-- Parameters: Way to provide re-useable inputs
+- Conditionals: list of conditions to perform resource creation.
+    - `Fn::(And|Equals|If|Not|Or)`
+- Parameters: 
+    - Parameters are a way to input custom values to your CloudFormation    stack during stack creation or update. They allow you to make your templates more flexible and reusable by enabling users to provide specific values at runtime.
+- Mappings: 
+    - Auto-fill values.
+    - Mappings are used to define a set of key-value pairs (a map) in your CloudFormation template. These key-value pairs provide a way to associate logical names with specific values based on a given input (typically a Region or an environment type). Mappings are useful when you want to customize resource configurations based on the region or environment in which you are deploying the CloudFormation stack.
 
 
 AWS Systems Manager:

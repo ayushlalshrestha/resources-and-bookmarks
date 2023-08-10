@@ -14,9 +14,11 @@ SQS: Asynchronous Queue model
 - Long polling vs. Short polling
 - In FIFO queues, message can have group_id to group messages
 
+
 SNS: Pub/Sub model
-- An SQS can be a subscriber to an SNS
+- A `topic` is `subscribed` by a Subscription
+- An SQS can be a subscriber to an SNS.
 - SNS Types:
     - Standard: A message could be delivered more than once, no order guarantee 
     - FIFOs: Maintains ordering, can only publish to SQS
-- eg. S3 bucket could write events into an SNS
+- eg. S3 bucket could write events into an SNS.

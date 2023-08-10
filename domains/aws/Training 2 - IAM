@@ -35,3 +35,4 @@ Explanation: Some AWS service will need to perform actions on your behalf. To do
 Note: 
 - Every resource has an arn.
 - Maximum policy size is 2KB.
+- IAM has database authentication capabilities that would allow an RDS database to only be accessed using the profile credentials specific to your EC2 instances.

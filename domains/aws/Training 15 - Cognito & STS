@@ -1,4 +1,14 @@
 
+Amazon Cognito:
+- User pools: directories of users that provide sign up & sign in options for your application users.
+- Identity pools allows you to give your users access to other AWS resources.
+
+General flow between an End Device & Cognito:
+1. Device authenticates with the user pool and gets tokens.
+2. Device exchanges tokens with the Identity pool and gets AWS credentials.
+3. Device now accesses AWS services like s3 using those credentials.
+
+
 Using STS to assume a Role:
 1. Define an IAM Role (with policies & permissions, etc)
 2. Define which principals can access (assume this IAM Role)

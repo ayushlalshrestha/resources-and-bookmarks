@@ -19,18 +19,22 @@ Auto Scaling by:
 - Scale up by Queue size in SQS.
 
 Types of Scaling:
-- Scheduled Scaling
-- Metric based scaling
-- Predictive scaling
+- Scheduled Scaling: Scale based on date and time.
+- Metric based scaling: Scale based on target value such as CPU utilization.
+- Predictive scaling: Scale based on machine learning.
 
 Scaling types
 - Maintain: Maintain X number of instances.
 - Manual: My needs change so rarely that I can manually add & remove.
 - Scheduled: Every monday morning, we get a rush in out website.
 - Dynamic: Scale based on behaviour of elements.
+    - Simple scaling (through CloudWatch metric)
+    - Step scaling: adjustment depends on size of alarm breach
+    - Target tracking scaling: Target value for specific metric.
 
 
 Notes:
 - IAM roles attached to an ASG will get assigned to the ec2 instances.
-- Create lifecycle hooks to run pre-delete scripts, logic.
+- Create lifecycle hooks to run pre-delete scripts, logic while scaling-in.
 - Cooldown period: defines time interval to cool-down & take some load after sclaing up.
+- install the `stress` package and run the command `stree --cpu 1 --timeout 330`

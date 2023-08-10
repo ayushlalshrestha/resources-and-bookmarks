@@ -1,0 +1,33 @@
+
+
+AWS Pricing Calculator
+- Calculate your expenditures.
+
+AWS Cost Explorer
+- Explore previous costs and your usages.
+- Not to be used as a calculator.
+- View data of last 13 months.
+
+AWS Budgets
+- Alerts you when your costs or usage exceeds your budgeted amount or forcasted to exceed.
+
+AWS Cost Optimization & Monitor
+- Help you manage and optimize your costs across your AWS environment.
+
+--- 
+
+AWS Cloudwatch
+- collects & tracks metrics from your resources & applications.
+- Helps you correlate, analyze, visualise metrics & logs.
+- Enables you to detect alarms & detect anamalous behaviour.
+- Can send notifications or make changes to resources that you are monitoring.
+
+
+AWS CloudTrail
+- Records activity made on your account & delivers log files to your Amazon S3 bucket.
+- Provides visibility into user activity by recording actions taken from API calls.
+- Records important information about each action, including who made the request, the services used, the actions performed, parameters for the actions, and the response elements returned by the AWS service. This information helps you track changes made to your AWS resources and to troubleshoot operational issues. 
+- CloudTrail makes it easier to ensure compliance with internal policies and regulatory standards.
+
+--- 
+

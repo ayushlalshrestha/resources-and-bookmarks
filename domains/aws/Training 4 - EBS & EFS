@@ -2,23 +2,24 @@
 Storage Options for ec2 instances:
 
 EBS - Elastic Block Storage
-- Is a Network drive, Network USB stick.
+- Is a Network drive, like Network USB stick.
 - Data transfer over network.
-- Can be detached from 1 ec2 & attached to another ec2.
+- Can be detached from 1 ec2 instance & attached to another ec2.
 - Restricted to an availability zone.
 - EBS (SSD variations): General Purpose vs. Provisioned IOPS .
 - EBS (HDD variations): Throughput optimized vs. Cold HDD .
 - Size can be increased (but not decreased). Reconfiguration in ec2 is necessary.
 - ec2 delete_on_termination option
-- Mount to attach a new EBS to an ec2
+- A new EBS should be explicitly 'mounted' to an ec2 instance.
+- Attach a volume to multiple instances with Amazon EBS Multi-Attach.
 
 EBS Snapshots:
 - Setup CloudWatch job to create a snapshot.
-- Recreate a volume in tea new AZ.
+- Recreate a volume in a new AZ.
 - Snapshot lifecycle manager to create & delete snapshots.
 - Convert an unencrypted EBS volume to an enrypted new volume
     - create a snapshot of the unencrypted root device volume.
-    - create a copy of the snapshot & select the `encrypt` option
+    - create a copy of the snapshot & select the `encrypt` option.
     - create an AMI from the encrypted snapshot.
     - use that AMI to launch new encrypted instances.
 
@@ -28,13 +29,14 @@ Types of EBS:
 - io1/io2 SSD: Highest performance SSD
 - st1 HDD: Low cost high frequency HDD
 - sc1 HDD: Lowest cost low frequency HDD
+- Provisioned IOPS SSD (io2 Block Express): highest-performance SSD volume designed for business-critical latency-sensitive transactional workloads.
 
 Instance Storage
 - ephemeral, lose the data once the ec2 instance is stopped
 
 EFS - Elastic File System
 - Network file system that can be mounted on multiple EC2 instances at once.
-- Automatically scaling & backups.
+- Automatic scaling & backups.
 - use cases: content management, web serving, data sharing.
 - uses NFS v4.1 protocol.
 - EFS is `3 x EBS` and `20 x S3` in costs.
@@ -51,3 +53,18 @@ AWS Backup
 - Consolidation: Use AWS Backup to backup AWS services such as ec2, ebs, storage gateway, etc.
 - Organizations: Use AWS Backup with AWS Organizations to backup different services to different accounts.
 
+
+---
+
+EFS to EC2:
+Security Group Client ID (ID of the ec2 instance): sg-0110790f40dc05661
+ips -- public:3.232.191.160, private:10.0.1.155
+
+mount command:
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-0fefb4faddc367e2c.efs.us-east-1.amazonaws.com:/ efs
+
+Show details command:
+sudo df -hT
+
+Examine the write performance characteristics of your file system by entering the command:
+sudo fio --name=fio-efs --filesize=10G --filename=./efs/fio-efs-test.img --bs=1M --nrfiles=1 --direct=1 --sync=0 --rw=write --iodepth=200 --ioengine=libaio

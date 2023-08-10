@@ -13,3 +13,25 @@ Cloudfront
 Amazon Elastic Transcoder
 - Use Amazon Elastic Transcoder pipeline to transcode different qualities of a Video.
 - In Amazon Elastic Transcoder, create a pipeline pointing to an S3, there create a Job.
+
+
+AWS Route 53
+- scalable & highly available domain name system (DNS) web service.
+- route internet traffic to web applications, making it easier for users to access resources by translating human-readable domain names (like www.example.com) into IP addresses.
+- Domain Registration: purchase, manage, and renew domain names directly within the service.
+- DNS Management: provides a global network of DNS servers that respond to DNS queries with low latency, reliability & fast resolution of domain names.
+- DNS Health Checks resources & automatically route traffic away from unhealthy or unavailable resources to healthy ones.
+- Traffic Routing & Load Balancing: distribute incoming traffic across multiple AWS resources or different endpoints based on routing policies like
+    - latency-based routing
+    - geolocation-based routing
+    - geoproximity routing
+    - weighted round robin routing
+    - simple routing
+- Global Acceleration: Route 53's Anycast network helps route end users to the nearest available endpoint, reducing latency and improving user experience.
+- Domain Name Services: Route 53 supports a wide range of DNS record types, including A, AAAA, CNAME, MX, TXT, and more, enabling you to configure DNS settings for various purposes.
+- Private DNS for VPC: It allows you to create a private DNS namespace for your Amazon Virtual Private Cloud (VPC), making it easy to resolve domain names for internal resources without exposing them to the public internet.
+- Traffic Flow: Route 53 Traffic Flow simplifies the management of complex traffic-routing configurations by visualizing and managing how your domain's traffic is routed globally.
+- Domain Name Transfer: You can transfer domain names to Route 53 from other registrars and consolidate your DNS management within AWS.
+- Integration with AWS Services: Route 53 integrates seamlessly with other AWS services like Amazon S3, Amazon EC2, AWS Elastic Beanstalk, and AWS CloudFront, enhancing overall application performance and reliability.
+- Security: Route 53 supports DNSSEC (Domain Name System Security Extensions) to help secure DNS queries and responses against potential attacks.
+- AWS Route 53 is a versatile service that serves as both a DNS resolver and a traffic router, providing the backbone for reliable and performant internet communication for your applications hosted on AWS or elsewhere.

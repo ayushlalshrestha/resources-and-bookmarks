@@ -6,7 +6,9 @@ AWS Direct Connect
 
 Site to Site VPN
 - Connect your on-prem network to your VPC.
-- establish a secure and encrypted connection between your on-premises network and your AWS VPC over the internet. It creates an IPsec VPN tunnel that enables secure communication between your on-premises resources and resources within the VPC. This is suitable for scenarios where you have a hardware VPN appliance or a software VPN client on your on-premises network.
+- Establish a secure and encrypted connection between your on-premises network and your AWS VPC over the internet. 
+- Creates an IPsec VPN tunnel between your on-premises resources & resources within the AWS VPC. 
+- This is suitable for scenarios where you have a hardware VPN appliance or a software VPN client on your on-premises network.
 - 2 types of routing:
     - Static routing: requires you to specify all routes.
     - Use BGP to advertiseits route to the Virtual Private Gateway.
@@ -55,3 +57,10 @@ Types of VPC Endpoints:
 Regarding AWS Storage Gateway, it is not a VPC endpoint. AWS Storage Gateway is a hybrid cloud storage service that connects on-premises environments with AWS cloud storage. It does not provide an endpoint for direct access within your VPC. Instead, it operates as a bridge between your on-premises infrastructure and AWS cloud storage services like Amazon S3, Amazon Glacier, and Amazon EBS.
 
 In summary, VPC endpoints are a way to privately access specific AWS services from your VPC without going over the public internet. AWS offers Gateway Endpoints and Interface Endpoints to connect to various services. However, AWS Storage Gateway is not a VPC endpoint; it's a separate service for hybrid cloud storage integration.
+
+
+
+Some questions to ask to ChatGPT:
+1. Is Storage gateway supported in S3, EFS and EBS?
+2. what are VPC Endpoints and how do you use them ?
+
