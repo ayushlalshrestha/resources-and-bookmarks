@@ -41,21 +41,30 @@ Global Accelerator
 ### AWS VPC Endpoints
 Is a feature in AWS that enable you to privately connect your VPC to supported AWS services and APIs without requiring public internet access. With VPC endpoints, you can access AWS services directly from your VPC without traversing the internet, providing enhanced security and reducing data exposure risks.
 Types of VPC Endpoints:
-1. Gateway Endpoints:
-   - Gateway endpoints are used to connect your VPC to AWS services using an elastic network interface (ENI) as a target. They are used for services powered by AWS PrivateLink, which allows access to supported AWS services via a private IP address in your VPC.
-   - Examples of services accessible through Gateway Endpoints include Amazon S3, Amazon DynamoDB, and Amazon Glacier.
-
-2. Interface Endpoints:
+1. Interface Endpoints:
    - Interface endpoints are used to connect your VPC to AWS services using private IP addresses, just like Gateway Endpoints. However, they support a broader range of services, including services not natively powered by AWS PrivateLink.
    - Interface Endpoints are powered by AWS PrivateLink, but AWS also allows third-party service providers to create their own VPC endpoint services using AWS PrivateLink.
+   - Interface Endpoints use AWS PrivateLink technology to create a private connection between your VPC and the supported AWS service's endpoint.
+   - They operate at Layer 3 (network layer) of the OSI model.
+   - Interface Endpoints are used to access AWS services that support PrivateLink, such as Amazon S3, DynamoDB, and more.
+   - Each Interface Endpoint is assigned one or more private IP addresses from your VPC's IP address range.
    - Examples of services accessible through Interface Endpoints include Amazon Elastic Compute Cloud (EC2), AWS CloudWatch, AWS Systems Manager, and many others.
+
+2. Gateway Endpoints:
+   - Gateway Endpoints are used to connect your VPC to AWS services that have their own internet gateway, such as Amazon S3.
+   - It operates at Layer 4 (transport layer) of the OSI model.
+   - Gateway Endpoints are available for specific AWS services and are used to access services over the AWS network backbone without traversing the public internet.
+   - Gateway Endpoints are associated with a particular route table in your VPC to direct traffic to the endpoint.
 
 3. Gateway Load Balancer Endpoints:
    - Gateway Load Balancer endpoints are used to connect your VPC to AWS services through a Gateway Load Balancer, which enables high availability and redundancy.
    - These endpoints are used specifically for AWS services that are integrated with Gateway Load Balancer.
 
-Regarding AWS Storage Gateway, it is not a VPC endpoint. AWS Storage Gateway is a hybrid cloud storage service that connects on-premises environments with AWS cloud storage. It does not provide an endpoint for direct access within your VPC. Instead, it operates as a bridge between your on-premises infrastructure and AWS cloud storage services like Amazon S3, Amazon Glacier, and Amazon EBS.
 
+AWS PrivateLink
+- Highly available, scalable technology that you can use to privately connect your VPC to services as if they were in your VPC. You do not need to use an internet gateway, NAT device, public IP address, AWS Direct Connect connection, or AWS Site-to-Site VPN connection to allow communication with the service from your private subnets. Therefore, you control the specific API endpoints, sites, and services that are reachable from your VPC.
+
+Regarding AWS Storage Gateway, it is not a VPC endpoint. AWS Storage Gateway is a hybrid cloud storage service that connects on-premises environments with AWS cloud storage. It does not provide an endpoint for direct access within your VPC. Instead, it operates as a bridge between your on-premises infrastructure and AWS cloud storage services like Amazon S3, Amazon Glacier, and Amazon EBS.
 In summary, VPC endpoints are a way to privately access specific AWS services from your VPC without going over the public internet. AWS offers Gateway Endpoints and Interface Endpoints to connect to various services. However, AWS Storage Gateway is not a VPC endpoint; it's a separate service for hybrid cloud storage integration.
 
 

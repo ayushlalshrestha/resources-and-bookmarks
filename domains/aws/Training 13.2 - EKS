@@ -1,0 +1,26 @@
+
+
+
+Amazon EKS overview:
+- way to launch managed kubernetes cluster on aws
+- alternative to ecs, similar goal but different API
+- eks supports EC2 if you want to deploy worker nodes or Fargate to deploy serverless containers.
+- nodes in eks can be managed by an ASG
+
+
+Amazon EKS node types:
+1. Managed node groups
+    - creates and manages nodes (EC2 instances)
+    - Nodes are part of asg managed by eks
+    - supports on-demand or spot instances
+2. Self-managed nodes
+    - nodes created by you and registered to the eks cluster
+    - managed by asg
+    - use eks optimized amis
+3. AWS Fargate
+
+
+Amazon EKS  data volumes
+- need to specify StorageClass manifest on your eks cluster
+- Leverages a Container Storage Interface compliant driver
+- support of ebs and efs, fsx for luster

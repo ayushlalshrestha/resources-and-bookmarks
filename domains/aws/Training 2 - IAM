@@ -24,7 +24,8 @@ IAM Policies
 IAM Roles:
 - Set of permissions that can be attached to an AWS resource so that it can access other resources.
 - Some AWS services will need to perform actions on your behalf.
-- Trust policy of a `Role` defines which services can assume the `Role``.
+- Trust policy of a `Role` defines which services can assume the `Role`.
+- The role should still be explicitly assigned to the `service`.
 - Trusted entities (In Roles) = Entities that can assume this role under specified conditions.
 - Roles can only be passed to what their trust allows.
 

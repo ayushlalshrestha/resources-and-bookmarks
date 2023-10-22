@@ -2,18 +2,20 @@
 What is RDS:
 - Managed database service for MySQL, Postgresql, Oracle, etc.
 - Automated provisioning, OS Patches.
-- Continuous backups and restore to specific timestamps.
+- Continuous backups and restore to specific timestamps (point in time restore).
 - Read replicas for improved read performances.
 - Multi AZ setup of Disaster recovery.
 - Storage backed by EBS (gp2 or io1).
 - Supports vertical scaling (storage auto scaling) vs. horizontal scaling (with read replicas)/
 - Use RDS & not NoSQL if complex joins across tables is required.
-- RDS being SQL provides ACID transactions
+- RDS being SQL provides ACID transactions.
+- RDS storage auto-scaling: increase RDS storage dynamically.
 
 Automated backups:
 - Daily full backups during scheduled maintenance window.
 - Transactional logs are backed up every 5 minutes.
 - 7 days retention by default.
+- manual snapshots can also be taken.
 
 Read Replication:
 - Improve read performance by making exact copy of your database.

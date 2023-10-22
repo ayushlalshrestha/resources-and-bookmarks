@@ -1,0 +1,19 @@
+
+Kuberenetes notes:
+- kubernetes is an open-source system for automatic deployment, scaling, and management of containerized applications.
+- deploy nodes for eg. EC2 instances.
+- each nodes will deploy EKS pods.
+- A  pod hosts one or more containers
+- the components of kubernetes are as:
+    - The control plane: 
+        - responsible for managing the state of the cluster.
+        - API server: serves client requests and communicatees with the worker nodes
+        - etcd: stores information about the cluster
+        - controller manager:
+            - manage controllers that manage the state of the cluster
+            - eg. replication controller, deployment controller
+        - scheduler: schedule pods for the worker nodes and fetches the capacity of the nodes.
+    - Worker nodes:
+        - kubelet: communicates with the control plane.
+        - controller runtime: runs the containers, pulls image, etc.
+        - kube-proxy: networking proxy, routing, load balancing.

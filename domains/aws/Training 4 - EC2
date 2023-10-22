@@ -12,7 +12,8 @@ Types:
 
 
 Instance types and Naming conventions:
-- T & M for general purpose
+- T for Burstable cpu performance instances
+- M for general purpose
 - C for compute
 - R for Memory
 - I & D for storage optimized
@@ -40,8 +41,6 @@ Notes:
 - AWS Outposts: deploy AWS services in your own premises.
 - If you want to include data from EBS volumes when creating an AMI, you need to take a separate snapshot of the EBS volumes and create a new AMI from those snapshots. This process is called creating a custom AMI.
 
-Systems Manager
-It will host the various parametes of your application, for eg. the DB's password
 
 Questions about EC2:
 Q1: Does the EBS and root volumes also get included when creating an AMI from an ec2 Instance?

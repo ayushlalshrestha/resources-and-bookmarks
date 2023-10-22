@@ -1,11 +1,11 @@
 Amazon Simple Storage Service
 - Buckets & Objects.
 - Object have a key & the key is the full path (prefix + object_name).
+- "bucket/folder/sub_folder/object" where "folder/sub_folder" is the prefix.
 - query in place.
 - Amazon Athena can be used to query unstructured data in S3.
 - S3 objects can be versioned.
 - Amazon Glacier can be used to archive old data.
-- Amazon S3 transfer acceleration
 - Use Cloudfront as proxy to cache s3 access.
 - Intelligent tiering vs. Custom Lifecycle policy.
 
@@ -25,22 +25,27 @@ S3 Security:
     - Client side encryption
 
 
-S3 Features:
-- Data Lake Concepts for analytics such as Athena, Redshift spectrum.
-- Events: Trigger notifications to SNS, SQS, Lambda for certain events in the bucket.
-- Static web hosting.
-- Lifecycle management: rules to transition objects to cheap tier or deletion.
-- Requester pays option: Downloader pays.
-- Multi-part upload.
-- Byte range downloads: by downloading chunks in byte ranges.
-
-
 S3 properties:
-- Bucket should be universally unique.
+- Bucket name should be universally unique.
 - S3 Standard: 99.99% availability & 11 9's durability.
 - Strong consistency.
 - Object URL = https://<bucket name>.s3.<region>.amazonaws.com/<object key>
 - more prefixes (i.e subfolders) will increase performance.
+- Latency = 100-200ms, 
+- Your app can achieve 3500 PUT/POST & 5500 GET per second per prefix in a bucket.
+- eventual consistency for overwrites puts and deletes.
+
+
+S3 Features:
+- Data Lake Concepts for analytics such as Athena, Redshift spectrum.
+- Events: Trigger event notifications to SNS, SQS or Lambda for certain events in the bucket.
+- S3 event notification can also be achieved through Amazon EventBridge.
+- Static web hosting.
+- Lifecycle management: rules to transition objects to cheap tier or deletion.
+- Requester pays option: Downloader pays.
+- Multi-part upload.
+- Byte range downloads: by downloading chunks in byte ranges parallely.
+- S3 transfer acceleration for fast transfers (1st transfer to AWS edge locations)
 
 
 S3 storage classes:

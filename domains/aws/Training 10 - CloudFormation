@@ -18,11 +18,28 @@ Template rules:
 
 
 AWS Systems Manager:
-- Manage systems
-- Patch Management
-- Parameter Store
+- host the various parametes of your application, for eg. the DB's password
+- Manage systems.
+- Patch Management (apply OS patches), software upgrades.
+- Parameter Store.
+- View detailed system configurations across fleet of instances.
+- Manage servers in-cloud or on-prem.
+- SSM is the AWS systems manager agent that is to be installed in the client machine.
+- Run commands, Automation, Maintainance windows, etc.
+
+
+AWS Ops Work:
+- configurations management service.
+- automates how servers are configured, deployed & managed.
 
 
 Links:
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
 - https://github.com/aws-quickstart/quickstart-amazon-aurora-postgresql/blob/main/templates/aurora_postgres-main.template.yaml
+- Use CloudFormation designer
+
+Try:
+- aws configure
+- aws cloudformation create-stack --stack-name SimpleCFStack --template-body file://test_cf.yaml
+- aws cloudformation describe-stacks --stack-name SimpleCFStack
+

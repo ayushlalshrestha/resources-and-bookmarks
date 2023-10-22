@@ -14,14 +14,14 @@ ALB - Application load balancers
 - Routing tables to different target groups by defining listeners:
     - Based on the path in the URL.
     - Based on hostname of the URL.
-    - Based on some query paramter, header of the request.
-- Has a port mapping feature to redirect to a dynamic port in ECS
+    - Based on some query parameter, header of the request.
+- Has a port mapping feature to redirect to a dynamic port in ECS.
 - Supports SSL/TLS termination, offload SSL decryption to the load balancer.
 - Cross-Zone Load Balancing: Distributes traffic evenly across instances in multiple Availability Zones.
 
 NLB - Network load balancers
 - Forward TCP & UDP traffic to your instances.
-- Low latency (handle millions of MPS)
+- Low latency (handle millions of MPS).
 - NLB has 1 static IP per AZ.
 - Provides a static IP address that can be associated with a load balancer.
 

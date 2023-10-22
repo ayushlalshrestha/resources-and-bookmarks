@@ -36,5 +36,5 @@ Scaling types
 Notes:
 - IAM roles attached to an ASG will get assigned to the ec2 instances.
 - Create lifecycle hooks to run pre-delete scripts, logic while scaling-in.
-- Cooldown period: defines time interval to cool-down & take some load after sclaing up.
+- Cooldown period: defines time interval to cool-down & take some load after scaling up.
 - install the `stress` package and run the command `stree --cpu 1 --timeout 330`
