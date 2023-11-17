@@ -1,4 +1,7 @@
-Kinesis: Real time streaming of Big data
+Kinesis: 
+- Real time streaming of Big data.
+- allows you to ingest, process, and analyze real-time streaming data.
+- think of it as a huge data highway.
 
 Kinesis data streams
 - capture, process & store data streams
@@ -12,14 +15,21 @@ Kinesis data streams
 - Consumers: Kinesis data analytics, KCL (kinesis consumer library)
 
 
-Kinesis data firehose
-- load data streams into AWS data store (eg. S3)
-- acts as a store_handler
+Kinesis Data Firehose
+- Load data streams into AWS data store (eg. S3)
+- Acts as a store_handler
+- Data transfer tool to get information to S3, redshift, elasticsearch.
 
-Kinesis data analytics
-- run standard SQL queries against data streams.
-- take data from sources like data stream, firehose.
-- analyze data streams with SQL or Apache Flink.
-        
 
-Amazon MQ as alternative to RabbitMQ
+Kinesis Data Analytics
+- Run standard SQL queries against data streams.
+- Take data from sources like data stream, firehose.
+- Analyze data streams with SQL or Apache Flink.
+
+Amazon Athena
+- interactive query service to analyze data in S3 using SQL
+- directly query data in S3
+- use Glue for ETL (discover, prepare, combine)
+
+Notes:
+- Amazon MQ as alternative to RabbitMQ

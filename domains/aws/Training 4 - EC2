@@ -1,5 +1,6 @@
+Elastic Cloud Compute - EC2
 
-Security Groups: Definition of firewall rules
+Security Groups: Definition of firewall rules to and EC2 instance
 
 Types: 
 - On-demand: Pay by the hour
@@ -19,28 +20,34 @@ Instance types and Naming conventions:
 - I & D for storage optimized
 
 Placement groups:
-- Cluster: in same AZ for low network latency.
+- Cluster: in the same rack of a single AZ for low network latency.
 - Spread: Placed on distinct underlying hardware in different AZ.
 - Partial: Different network & power source in different AZ. Eg. for HBase cluster.
 - You can move instances into a different placement group.
 
 Network types in ec2:
-- ENI: General purpose
+- ENI (Elastic Network Interface)
+    - General purpose network interface to configure network in an ec2.
+    - Can be detached from one ec2 & attched to another.
+    - A security group can be attached to an ENI.
 - Elastic Network Adapter: 100Gb/s
 - Elastic Fabric Adapter: For high performance computing (HPC) & machine learning applications. Support OS-bypass.
 
 Notes:
 - Processor, memory & storage can be added and removed.
 - https://www.ec2instances.info  
-- Elastic IPs can be used to assign static Public IPs to your ec2 cluster.
-- AWS Compute Optimizer: Gives configuration recommendation based on usages.
+- Elastic IPs can be used to assign static Public IPs to your ec2 instance.
 - All inbounds are denied & all outbounds are allowed by default in a security group.
-- Bootstrap script (*.sh) is provided as user data.
-- ec2 metadata URL can be used to retrieve the information about the instance. Eg. `curl https://169.254.169.254/latest/meta-data/`
-- Use AWS cloud vmware to deploy a vCenter in AWS.
-- AWS Outposts: deploy AWS services in your own premises.
+- `user data` is the bootstrap script (*.sh) that runs on the initial boot.
+- ec2 can retrieve it's own metadata through `curl https://169.254.169.254/latest/meta-data/`
 - If you want to include data from EBS volumes when creating an AMI, you need to take a separate snapshot of the EBS volumes and create a new AMI from those snapshots. This process is called creating a custom AMI.
+- There is a vCPU-based On-Demand Instance limit per Region.
+- Hibernate feature is also available in ec2.
 
+Related Services:
+- AWS Compute Optimizer: Gives configuration recommendation based on usages.
+- Use AWS Cloud VMware to deploy a vCenter in AWS.
+- AWS Outposts: deploy AWS services in your own premises.
 
 Questions about EC2:
 Q1: Does the EBS and root volumes also get included when creating an AMI from an ec2 Instance?

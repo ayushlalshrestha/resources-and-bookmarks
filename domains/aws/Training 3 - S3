@@ -11,12 +11,13 @@ Amazon Simple Storage Service
 
 
 S3 Security:
-- Bucket Policy that applies to all the objects in the bucket (IAM JSON).
-- Resource based security on specific Objects through ACL.
-- User based IAM Policy.
+- Bucket Policy that applies to all the objects in the bucket (IAM JSON defined in the bucket).
+- Resource based security on specific Objects through ACL (defined in the bucket).
+- User (role) based IAM Policy (defined in IAM attached to a user or role).
 - Bucket policy has the highest precedence.
 - Enforce encryption with bucket policy.
-- Cross account access can be given by using trust policies.
+- Cross account access can be given by using `trust policies & permissions`.
+- MFA before delete.
 - Encryption:
     - Encryption in transit with HTTPs.
     - Encryption at rest - SSE with s3 managed keys (header z-amz-server-side-encryption=AES256)
@@ -25,12 +26,12 @@ S3 Security:
     - Client side encryption
 
 
-S3 properties:
+S3 Properties:
 - Bucket name should be universally unique.
 - S3 Standard: 99.99% availability & 11 9's durability.
 - Strong consistency.
 - Object URL = https://<bucket name>.s3.<region>.amazonaws.com/<object key>
-- more prefixes (i.e subfolders) will increase performance.
+- More prefixes (i.e subfolders) will increase performance.
 - Latency = 100-200ms, 
 - Your app can achieve 3500 PUT/POST & 5500 GET per second per prefix in a bucket.
 - eventual consistency for overwrites puts and deletes.
@@ -45,16 +46,20 @@ S3 Features:
 - Requester pays option: Downloader pays.
 - Multi-part upload.
 - Byte range downloads: by downloading chunks in byte ranges parallely.
-- S3 transfer acceleration for fast transfers (1st transfer to AWS edge locations)
+- S3 transfer acceleration for fast transfers (1st transfer to AWS edge locations).
+- Cross region replication.
+- S3 Gateway endpoint (ENI) can be attached to an ec2 to access S3 without leaving AWS network.
+- S3 notification feature enables you to receive notifications when certain events happen in your bucket.
 
 
-S3 storage classes:
+S3 Storage Classes:
 - S3 Standard: High-performance storage for frequently accessed data.
-- S3 Intelligent-Tiering: Automatically moves data between access tiers based on usage patterns.
 - S3 Standard-IA: Lower-cost storage for infrequently accessed data.
 - S3 One Zone-IA: Lower-cost storage in a single Availability Zone.
+- S3 Glacier Instant retrieval
 - S3 Glacier: Low-cost storage for long-term archiving.
 - S3 Glacier Deep Archive: Lowest-cost storage for infrequently accessed and archived data.
+- S3 Intelligent-Tiering: Automatically moves data between access tiers based on usage patterns.
 
 
 Challenges:

@@ -1,11 +1,10 @@
 
-
-
 Amazon EKS overview:
-- way to launch managed kubernetes cluster on aws
-- alternative to ecs, similar goal but different API
+- way to launch managed kubernetes cluster on AWS.
+- alternative to ecs, similar goal but different API.
 - eks supports EC2 if you want to deploy worker nodes or Fargate to deploy serverless containers.
-- nodes in eks can be managed by an ASG
+- nodes in eks can be managed by an ASG.
+- create nodegroups & nodes in a cluster in EKS
 
 
 Amazon EKS node types:

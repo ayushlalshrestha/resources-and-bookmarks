@@ -1,0 +1,28 @@
+
+Amazon Athena
+- Interactive query service to directly analyze data in S3 using standard SQL. 
+- Serverless, so there is no infrastructure to set up or manage.
+- Athena also scales automatically—running queries in parallel—so results are fast, even with large datasets and complex queries.
+- Pay only for the queries you run
+- Ad-hoc queries on data lakes
+- Business intelligence (BI) and machine learning (ML) workloads
+- Interactive analytics
+
+
+Amazon Redshift 
+- Fully-managed, petabyte-scale data warehouse service in the Cloud.
+- Redshift data warehouse is a collection of computing resources called nodes, which are organized into a group called a cluster. 
+- Each cluster runs an Amazon Redshift engine and contains one or more databases.
+- High-performance analytics on large datasets
+- Complex queries
+- Mission-critical applications
+- Redshift is a columnar database
+
+
+Amazon Redshift Spectrum
+- Query data that is stored outside of Redshift, such as in S3, Amazon DynamoDB, or Amazon EMR.
+- Spectrum uses a distributed query engine to query data in S3. The query engine breaks the data into smaller chunks and then processes the chunks in parallel on multiple Redshift nodes. This allows Spectrum to query large datasets efficiently.
+- Redshift Spectrum can be used to copy data from S3 into Redshift. This can be useful if you need to frequently query the data in S3 or if you need to perform complex data transformations on the data.
+- Steps on how to query S3 data using Redshift Spectrum:
+    - Create an external schema for the data in S3.
+    - Run a SQL query to query the data in S3 using the external schema.

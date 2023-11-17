@@ -1,13 +1,13 @@
 
 Kuberenetes notes:
-- kubernetes is an open-source system for automatic deployment, scaling, and management of containerized applications.
-- deploy nodes for eg. EC2 instances.
-- each nodes will deploy EKS pods.
-- A  pod hosts one or more containers
-- the components of kubernetes are as:
+- Kubernetes is an open-source system for automatic deployment, scaling, and management of containerized applications.
+- Deploy nodes for eg. EC2 instances.
+- Each nodes will deploy pods.
+- A pod hosts one or more containers.
+- The components of kubernetes are as:
     - The control plane: 
         - responsible for managing the state of the cluster.
-        - API server: serves client requests and communicatees with the worker nodes
+        - API server: serves  client requests and communicatees with the worker nodes
         - etcd: stores information about the cluster
         - controller manager:
             - manage controllers that manage the state of the cluster
@@ -17,3 +17,49 @@ Kuberenetes notes:
         - kubelet: communicates with the control plane.
         - controller runtime: runs the containers, pulls image, etc.
         - kube-proxy: networking proxy, routing, load balancing.
+- services abstract nodes and groups them together, they are stable network abstraction.
+
+
+Objects in kubernetes yaml:
+- pods: wraps one or more pods
+- deployments: scalibility and application releases
+- daemonsets: only one pod per node
+- stateful sets: stateful app requirements of the pods, etc 
+- Lots of other objects: secrets, volumes, loadbalancers, persistent volume, persistent volume claim 
+
+
+Notes for deployment:
+- If the control plane is self hosted, the `etcd` datastore could be a bottleneck
+
+
+## Persistent Storage
+1. PersistentVolume (PV): A PersistentVolume represents a physical storage resource in the cluster, such as a disk, a network-attached storage (NAS) volume, or cloud storage. PVs are cluster-level resources, and they can be provisioned either statically or dynamically. A PV is a way to abstract and manage actual storage resources within the cluster.
+
+2. PersistentVolumeClaim (PVC): A PersistentVolumeClaim is a request for storage made by a user or a pod in the cluster. It specifies the desired characteristics of the storage it needs, such as the access mode (e.g., ReadWriteOnce, ReadWriteMany), storage capacity, and storage class. When a PVC is created, Kubernetes attempts to bind it to an available PV that matches the PVC's requirements. PVCs are namespace-specific, so they are used within a particular namespace.
+
+3. StorageClass: A StorageClass is an abstraction that defines storage provisioning and management policies for dynamic provisioning of PVs. It provides a way to specify how volumes should be dynamically provisioned for PVCs. Each StorageClass can have its own set of parameters and policies. When a PVC requests a specific storage class, the Kubernetes cluster uses the associated StorageClass to dynamically provision a PV that matches the PVC's requirements.
+
+The relationship can be summarized as follows:
+- PVCs request storage resources with specific requirements (e.g., size, access mode) and can reference a StorageClass.
+- StorageClasses define how to provision storage resources based on policies and parameters.
+- When a PVC is created with a reference to a StorageClass, Kubernetes automatically creates and binds a PV that meets the requirements specified in the PVC and follows the policies defined in the StorageClass.
+
+This dynamic provisioning of PVs based on PVCs and StorageClasses simplifies the management of storage resources in Kubernetes, making it more flexible and adaptable to the needs of applications running in the cluster.
+
+
+## K8s networking
+- All nodes can talk.
+- All pods can talk - pod network overlays over all the pods.
+- All pods have their own IP address (which is accessible from any other pod in any other node).
+- The pods of a same deployment have the same IP with 24 CIDR.
+- k8s provide the CNI (container network interface) which 3rd party implements as plugins.
+- IP addresses of a pod is from the range of IPs assigned to the node it lies in.
+- A service is assigned with a name and IP which never changes.
+- An endpoint object is automatically created for each service, to watch the API server to keep record of pods in the service.
+
+
+## AutoScaling
+- Horizontal Pod AutoScaler:
+    - Increases the replica count in the deployment object.
+    - One HPA per deployment object.
+- Cluster AutoScaler: Scales the nodes in the cluster.

@@ -6,10 +6,22 @@ AWS Lambda:
 - Throw dependent packages to "lambda layers"
 
 Lambda features:
-- create `triggers` that trigger a lambda function. Eg. A file upload in an s3 bucket.
 - Lambda functions has `IAM Roles`.
 - You can optionally define the VPC, Subnet & SG for a Lambda function.
+- Define memory allocation and resources.
 - Max 10Gb memory & 15 minutes execution time.
+- create `triggers` that trigger a lambda function eg. A file upload in an s3 bucket.
+
+Notes on lambda:
+- 512MB to 10GB disk storage per lambda function in `/tmp`
+- Integration with EFS if needed.
+- 128MB to 10GB memory allocation per lambda function.
+- Compressed deployment package (.zip) should be less than 50MB.
+- Uncompressed deployment package must be less than 250MB.
+- Request and response size must be upto 6MB
+- Streamed responses upto 20MB
+- Different triggers can invoke a Lambda function
+- Lambda functions can run in or outside a VPC
 
 
 API Gateway:
@@ -24,14 +36,20 @@ API Gateway:
 AWS Step Funtions:
 - Serverless workflow service for creating, coordinating, and automating workflows.
 - State Machines: Define complex sequences of tasks (states) to build application workflows.
+- Build resilient workflows by orchestrating multiple Lambda functions.
+- Define flow of the order processing & incorporate retry logic in case of failures.
 
 
 AWS EventBridge:
-- serverless event bus service that connects your applications with data from various sources.
+- serverless event bus service that connects events in your applications and infrastructure with destinations.
 - delivers a stream of real time data from your own applications, SaaS applications & AWS services & then routes the data to targets.
 - create cron jobs.
+- EventPattern: define an event source and event pattern that will trigger your rule.
+- Scheduled rule: recurrent events as rate-based or cron-based.
 - EventBridge receives an event, an indicator of a change in environment, and applies a rule to route the event to a target. Rules match events to targets based on either the structure of the event, called an event pattern, or on a schedule. For example, when an Amazon EC2 instance changes from pending to running, you can have a rule that sends the event to a Lambda function.
 - more advanced than simple event triggers with more features like filtering events, more destinations, etc.
+- an eventbridge rule can trigger a lamba function
+- cron based scheule rule
 
 
 Example Lambda example Use case:

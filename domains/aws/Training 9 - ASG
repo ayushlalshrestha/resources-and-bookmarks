@@ -1,40 +1,54 @@
 ASG - Automatic Scaling Group
 
-Automatically register the new instances to the LoadBalancer.
+Components:
+- ASG (Auto Scaling Group)
+- Scaling Policies: Policies in an ASG defining when to scale.
+- Launch Templates
 
-ASGs have the following attributes as Launch Configuration:
-- AMI + Instance types
-- EC2 user data
-- EBS Volumes
-- Security Groups
-- SSH Key pairs
-- Network & Subnets information
-- Min/Max size
-- LoadBalancer information
-- Scaling policies
+Launch Templates:
+- All the needed settings that is required to spawn an EC2
+- Launch templates have the following attributes:
+    - AMI + Instance types
+    - EC2 user data
+    - EBS Volumes
+    - Security Groups
+    - SSH Key pairs
+    - Network & Subnets information (can also be done in the ASG)
+    - Min/Max size
+    - LoadBalancer information
+    - Scaling policies
+- Launch template can have versions.
 
-Auto Scaling by:
-- Alarms - It is possible to scale ASGs based on CloudWatch alarms.
-- Auto Scaling through custom metrics.
-- Scale up by Queue size in SQS.
-
-Types of Scaling:
-- Scheduled Scaling: Scale based on date and time.
-- Metric based scaling: Scale based on target value such as CPU utilization.
-- Predictive scaling: Scale based on machine learning.
 
 Scaling types
 - Maintain: Maintain X number of instances.
 - Manual: My needs change so rarely that I can manually add & remove.
 - Scheduled: Every monday morning, we get a rush in out website.
 - Dynamic: Scale based on behaviour of elements.
-    - Simple scaling (through CloudWatch metric)
-    - Step scaling: adjustment depends on size of alarm breach
-    - Target tracking scaling: Target value for specific metric.
+    - Step scaling: eg. add/remove instances based on average cpu utilization ranges.
+    - Target tracking (simple) scaling: Target value for specific metric (eg. maintain avrg. 50% CPU) done through CloudWatch metric.
+- Predictive scaling: scaling based on machine learning (forecast for next 48 hours).
+- Others:
+    - Alarms - Create a cloudwatch alarm based on some metric, add an auto-scaling action, attach the alarm to ASG through a `scaling policy`.
+    - Auto Scaling through custom metrics.
+    - Scale up by Queue size in SQS.
 
 
 Notes:
+- Automatically register the new instances to the LoadBalancer.
 - IAM roles attached to an ASG will get assigned to the ec2 instances.
 - Create lifecycle hooks to run pre-delete scripts, logic while scaling-in.
-- Cooldown period: defines time interval to cool-down & take some load after scaling up.
+- Cooldown period: time interval to pause auto-scaling to take some load after scaling up.
+- Warmup period: pause auto-scaling scale-down, dont put the instance behind ELB.
+- Maximum 50 scaling policies can be attached to an ASG.
 - install the `stress` package and run the command `stree --cpu 1 --timeout 330`
+
+
+Use case: Scaling ec2 using sqs:
+1. create an SQS
+2. create an ec2 instance which sends logs to the sqs
+3. create an SNS topic that will receive messages from cloudwatch (just for information).
+4. create a scale-out Cloudwatch alarm on the created SQS's metric which fires an alarm to the SNS topic if `ApproximateNumberOfMessagesVisible` is greater than 500, every 1 minute
+5. create a scale-in cloudwatch alarm created SQS's metric which fires an alarm to the SNS topic if `ApproximateNumberOfMessagesVisible` is less than 500, every 1 minute
+6. create an ec2 instance which will receive logs, create an AMI from it.
+6. create an ASG with the AMI, create 2 policies of `simple scaling` metric based on the 2 cloud watch alarms (of step 4 and 5)

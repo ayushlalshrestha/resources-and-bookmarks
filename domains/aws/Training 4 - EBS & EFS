@@ -6,23 +6,26 @@ EBS - Elastic Block Storage
 - Data transfer over network.
 - Can be detached from 1 ec2 instance & attached to another ec2.
 - Restricted to an availability zone.
-- EBS (SSD variations): General Purpose vs. Provisioned IOPS .
-- EBS (HDD variations): Throughput optimized vs. Cold HDD .
-- Size can be increased (but not decreased). Reconfiguration in ec2 is necessary.
-- ec2 delete_on_termination option
+- EBS (SSD variations): General Purpose vs. Provisioned IOPS.
+- EBS (HDD variations): Throughput optimized vs. Cold HDD.
+- Size can be increased (but not decreased. reconfiguration in ec2 is necessary).
+- ec2 'delete_on_termination' option.
 - A new EBS should be explicitly 'mounted' to an ec2 instance.
-- Attach a volume to multiple instances with Amazon EBS Multi-Attach.
+- Amazon EBS Multi-Attach:
+    - Attach a volume to multiple ec2 instances (upto 16)
+    - Must use a filesystem that is cluster aware (not EX4, XFS)
+- Data at rest & transition can be encrypted leveraging KMS keys.
 
 EBS Snapshots:
 - Setup CloudWatch job to create a snapshot.
-- Recreate a volume in a new AZ.
-- Snapshot lifecycle manager to create & delete snapshots.
-- Convert an unencrypted EBS volume to an enrypted new volume
-    - create a snapshot of the unencrypted root device volume.
-    - create a copy of the snapshot & select the `encrypt` option.
+- Recreate a volume in a new AZ or region.
+- Snapshot lifecycle manager to create, archive & delete snapshots.
+- Snapshots can be used to share to other users.
+- Use-case: Convert an unencrypted EBS volume to an enrypted new volume
+    - create a snapshot of the EBS volume.
+    - create a copy of the snapshot to another region/AZ & select the `encrypt` option.
     - create an AMI from the encrypted snapshot.
     - use that AMI to launch new encrypted instances.
-
 
 Types of EBS:
 - gp2/gp3 SSD: general purpose balanced price vs. performance SSDs
@@ -40,14 +43,20 @@ EFS - Elastic File System
 - use cases: content management, web serving, data sharing.
 - uses NFS v4.1 protocol.
 - EFS is `3 x EBS` and `20 x S3` in costs.
-- AWS DataSync connects On-prem to EFS.
-- AWS Storage gateway - connect On-prem with cloud.
-- Can handle upto 10 Gbps throughput
-- Modes: General purpose vs. Max I/O
-- Lifecycle management
+- Can handle upto 10 GBps throughput & 1000s of clients.
+- Lifecycle management (from standard to EFS IA, etc).
 - Create mount targets that defines interface that the clients can mount on.
-- FSx for windows
-- FSx for Lustre: for HPC applications which store directly to S3
+- Modes (set at creation): 
+    - Performance: General purpose vs. Max I/O.
+    - Throughput: Bursting vs. Provisioned (i.e defined).
+
+Notes on EFS:
+- FSx for windows.
+- FSx for Lustre: for HPC applications which store directly to S3.
+- Region based. Can be made AZ specific for development.
+- EFS has a security group.
+- AWS DataSync helps transfer On-prem data to EFS.
+- AWS Storage gateway - connect On-prem with cloud.
 
 AWS Backup
 - Consolidation: Use AWS Backup to backup AWS services such as ec2, ebs, storage gateway, etc.
@@ -55,12 +64,11 @@ AWS Backup
 
 
 ---
-
-EFS to EC2:
+Use-case: EFS to EC2:
 Security Group Client ID (ID of the ec2 instance): sg-0110790f40dc05661
 ips -- public:3.232.191.160, private:10.0.1.155
 
-mount command:
+Mount command to EFS:
 sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-0fefb4faddc367e2c.efs.us-east-1.amazonaws.com:/ efs
 
 Show details command:

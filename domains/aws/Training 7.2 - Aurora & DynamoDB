@@ -39,10 +39,8 @@ DynamoDB features:
     - Reduces request time from milli to micro seconds.
 
 
-
 Other DBs:
 - DocumentDB as an alternative to MongoDB
 - Keyspaces as an alternative to Cassandra
 - Neptune as a graph DB
 - Timestream for time-series DB
-

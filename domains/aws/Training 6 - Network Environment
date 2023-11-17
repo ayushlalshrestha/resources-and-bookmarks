@@ -33,13 +33,17 @@ NAT Gateway
 ## Connecting Networks
 VPC Peering
 - connect 2 different regions (2 different VPCs) by creating a `Peering connection` and including it in the route tables of the VPCs.
+- CIDR blocks of the 2 VPCs cannot collide.
 
-
-Transit gateways
+AWS Transit gateway
 - make it easy to have peering between a lot of VPCs.
 - allows for hub-and-spoke networking between VPCs that is easily extensible in the future.
 - eliminates the need for direct VPC-to-VPC peering connections.
+- To connect VPCs of the same region, create a transit gateway.
+- To connect VPCs of 2 regions, create transit gateway per region and peer them.
 
+AWS VPN CloudHub:
+- Connect on-prem network locations in a Hub & Spoke manner, using Virtual Private Gateway.
 
 VPC Endpoints: 
 - privately connect your VPC to AWS services.

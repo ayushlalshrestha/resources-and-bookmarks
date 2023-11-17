@@ -1,39 +1,45 @@
 
-ECS:
-- Orchestrates when containers run.
-- Maintains and scales fleets of instances.
+ECS - Elastic Container Service
+- Orchestrates when, where & how containers run.
+- Maintains and scales fleets of container instances.
 - Region specific.
 - ECS Launch types:
-    1. Fargate launch types
-    2. EC2 launch types
+    1. Fargate launch types - completely serverless.
+    2. EC2 launch types - ec2 based clusters where the containers run.
 - Autoscaling group for autoscale of ECS containers.
-- ECS Clusters
-    - ECS clusters are logical grouping of ec2 instances.
-    - Define the underlying system to run containers (Use ECS Optimized AMIs).
-    - The ECS agent registers the instance to the ECS cluster.
-    - The cluster that the ec2 is part of is defined in `/etc/ecs/ecs.config` file.
-    - Each cluster is associated with ASG if it is an EC2 based cluster.
-    - A cluster has a default support for Fargate, that scales automatically.
+
+
+Components of ECS:
+- Clusters: Definition (logical grouping) of the underlying compute resources to run the containers.
+    1. Fargate:
+        - are serverless resources to run the containers, that scales automatically.
+        - A cluster has a `default` support for Fargate.
+    2. EC2 compute resource:
+        - Define the underlying system to run containers (Use ECS Optimized AMIs).
+        - The ECS agent registers the instance to the ECS cluster.
+        - The cluster that the ec2 is part of is defined in `/etc/ecs/ecs.config` file.
+        - Each cluster is associated with ASG if it is an EC2 based cluster.
+        - `optional` i.e a cluster could not have ec2 based compute resources.
 - Task definition
     - acts as docker-compose.
-    - metadata defining how to run a docker container
+    - metadata defining how to run a docker container.
     - A task can have an IAM role.
     - Select Images, Configure Volumes, port mapping, etc.
-    - EFS can also be mounted to the container.
-    - You can select if th task should run in fargate or ec2 instances in the underlying cluster.
+    - Volumes allow you to mount filesystems such as EFS to the container.
+    - You can select if the task should run in fargate or ec2 instances in the underlying cluster.
 - Service definition
     - An ECS service enables you to simultaneously run and maintain a specified number of task definition instances in an ECS cluster. If one of the tasks fails or stops for any reason, the ECS service scheduler launches another task definition instance to replace it. Thus, it will maintain the desired count of tasks that were specified in the service.
     - Defines how many tasks should run & how (service is created inside a Cluster).
     - Connects Tasks with Clusters.
     - Ensures number of tasks desired is running in the fleet of ec2 instances or fargate.
     - Configure LoadBalancing so that load is balanced between the tasks (containers).
-    - Service Target group for ASG target group.
+    - Configure Target group for ASG target group.
     
 
 Auto scaling tasks inside a service:
 - Configure service autoscaling for tasks through ECS service auto-scaling.
 - Amazon ECS auto scaling uses AWS application auto scaling.
-- Cluster auto-scaling to scale the cluster. You can configure ECS to scale your auto-scaling group in and out automatically. Cluester auto scaling relies on capacity provider. These link your ECS cluster to the auto-scaling group you want to use. Each auto-scaling group is associated with a capacity provider and each capacity provider has only 1 auto-scaling group. However, many capacity providers can be associated with one ECS cluster. To scale the entire cluster automatically, each capacity provider manages the scaling of it's associated ASG.
+- Cluster auto-scaling to scale the cluster. You can configure ECS to scale your auto-scaling group in and out automatically. Cluster auto scaling relies on capacity provider. These link your ECS cluster to the auto-scaling group you want to use. Each auto-scaling group is associated with a capacity provider and each capacity provider has only 1 auto-scaling group. However, many capacity providers can be associated with one ECS cluster. To scale the entire cluster automatically, each capacity provider manages the scaling of it's associated ASG.
 - ECS cluster capacity provider: automatically provision & scale infrastructure for ec2 based "ECS tasks" to run on.
 
 
@@ -50,7 +56,8 @@ Notes:
     - Use the latest tag, check the "use latest" options in ECS
 - Cluster autoscaling gives more control over how tasks are scaled in a cluster.
 
-Microservice architecture with ELB & ASG with ec2 based ECS:
+
+Hands-on: Microservice architecture with ELB & ASG with ec2 based ECS:
 - Create 1 ELB.
 - Create 1 ASG for the ec2 instances (can also be created while creating the cluster)
 - Create 3 Tasks for 3 different applications (eg. users, posts, threads).
