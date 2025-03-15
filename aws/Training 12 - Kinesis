@@ -30,6 +30,9 @@ Amazon Athena
 - interactive query service to analyze data in S3 using SQL
 - directly query data in S3
 - use Glue for ETL (discover, prepare, combine)
+    - Glue crawlers get the unstructured data
+    - Then to Glue data catalog
+    - which can then be queried by Athena or sent to redshift spectrum
 
 Notes:
 - Amazon MQ as alternative to RabbitMQ

@@ -1,0 +1,10 @@
+
+Ollama.ai
+
+ollama serve
+
+ollama pull deepseek-r1
+
+ollama run llama3.2
+
+ollama run deepseek-r1

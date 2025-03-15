@@ -49,6 +49,7 @@ EFS - Elastic File System
 - Modes (set at creation): 
     - Performance: General purpose vs. Max I/O.
     - Throughput: Bursting vs. Provisioned (i.e defined).
+    - For the standard storage class, throughput scales at a rate of 50 MB/s per TB of storage.
 
 Notes on EFS:
 - FSx for windows.

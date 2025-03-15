@@ -3,18 +3,18 @@ IAM Policies
 - Definition of permission rules (json).
 - Define `effects` (allow/deny) on `actions` that are performed on aws `resources` by different `principals`
 - example of an Policy definition:
-  ```
-  {
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Effect": "Allow",
-        "Action": "s3:GetObject",
-        "Resource": "arn:aws:s3:::example-bucket/*"
-      }
-    ]
-  }
-  ```
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::example-bucket/*"
+    }
+  ]
+}
+```
 
 - When IAM determines permissions, an explicit Deny will always override any Allow statement.
 - `Conditions` define the condition to apply the policy.

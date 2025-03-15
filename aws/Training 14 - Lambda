@@ -48,8 +48,8 @@ AWS EventBridge:
 - Scheduled rule: recurrent events as rate-based or cron-based.
 - EventBridge receives an event, an indicator of a change in environment, and applies a rule to route the event to a target. Rules match events to targets based on either the structure of the event, called an event pattern, or on a schedule. For example, when an Amazon EC2 instance changes from pending to running, you can have a rule that sends the event to a Lambda function.
 - more advanced than simple event triggers with more features like filtering events, more destinations, etc.
-- an eventbridge rule can trigger a lamba function
-- cron based scheule rule
+- an eventbridge rule can trigger a lambda function
+- cron based schedule rule
 
 
 Example Lambda example Use case:

@@ -1,0 +1,902 @@
+decoding is 
+all that you need stat Quest 
+hello I'm Josh starmer and welcome to 
+stat Quest today we're going to talk 
+about decoder only Transformers and 
+they're going to be clearly explained 
+trust me whatever Transformer you want 
+to use it's better with lightning bam 
+[Music] 
+right now people are going totally 
+bananas about chat GPT 
+for example stat Squatch might type 
+something into chat gbt like 
+what is statquest 
+stat Quest is awesome bam 
+now in order to learn more about how 
+chat GPT Works let's learn about decoder 
+only Transformers which is the specific 
+type of Transformer used for chat GPT 
+note if you're not already familiar with 
+basic Transformers don't worry we'll go 
+through each Concept in a decoder only 
+Transformer one step at a time 
+that said if you are familiar with basic 
+Transformers then you might want to just 
+skip to the last chapter normal 
+Transformers versus decoder only 
+Transformers 
+anyway in this stat Quest we're going to 
+show how a decoder only Transformer can 
+take a simple input prompt 
+what is statquest and generate a simple 
+response awesome 
+now since a Transformer is a type of 
+neural network and neural networks 
+usually only have numbers for input 
+values 
+the first thing we need to do is find a 
+way to turn the input and output words 
+into numbers 
+there are a lot of ways to convert words 
+into numbers but for neural networks one 
+of the most commonly used methods is 
+called word embedding the main idea of 
+word embedding is to use a relatively 
+simple neural network that has one input 
+for every word and symbol in the 
+vocabulary that we want to use 
+in this case we have a super simple 
+vocabulary that allows us to input a 
+short phrase like what is statquest and 
+we also have an input for a potential 
+response awesome 
+lastly we have an input for the EOS 
+symbol which stands for end of sentence 
+or end of sequence 
+because the vocabulary can be a mix of 
+words word fragments and symbols we call 
+each input a token 
+the inputs are then connected to 
+something called an activation function 
+and in this example we have two 
+activation functions 
+and each connection multiplies the input 
+value by something called a weight 
+hey Josh where do these numbers come 
+from 
+great question Squatch and we'll answer 
+it in just a bit 
+for now let's just see how we convert 
+the word what into numbers 
+first we put a 1 into the input for what 
+and then zeros into all of the other 
+inputs 
+now we multiply the inputs by the 
+weights on the connections to the 
+activation functions 
+for example the input for what is 1 so 
+we multiply negative 2.38 by 1 to get 
+Negative 2.38 going to the activation 
+function on the left 
+and we multiply 0.10 by 1 to get 0.10 
+going to the activation function on the 
+right 
+in contrast if the input value for the 
+word is is zero 
+then we multiply 0.61 by 0 to get 0 
+going to the activation function on the 
+left 
+and we multiply 0.17 by 0 to get 0 going 
+to the activation function on the right 
+in other words when an input value is 0 
+then it only sends zeros to the 
+activation functions 
+and that means is statquest awesome and 
+the EOS symbol all just send zeros to 
+the activation functions 
+and only the weight values for what end 
+up at the activation functions because 
+its input value is 1. so in this case 
+negative 2.38 goes to the activation 
+function on the left and 0.10 goes to 
+the activation function on the right 
+in this example the activation functions 
+themselves are just identity functions 
+meaning the output values are the same 
+as the input values 
+in other words if the input value or 
+x-axis coordinate for the activation 
+function on the left is negative 2.38 
+then the output value the y-axis 
+coordinate will also be negative 2.38 
+likewise because the input to the 
+activation function on the right is 0.10 
+the output is also 0.10 
+thus these output values negative 2.38 
+and 0.10 are the numbers that represent 
+the word what 
+now before we move on I want to mention 
+that all of these weights and all of the 
+other weights we're going to talk about 
+in this Quest are determined using 
+something called back propagation 
+to get a sense of what back propagation 
+does let's imagine we had this data and 
+we wanted to fit a line to it 
+back propagation would start with a line 
+that has a random value for the y-axis 
+intercept and a random value for the 
+slope and then using an iterative 
+process back propagation would change 
+the y-axis intercept and slope one step 
+at a time until it found the optimal 
+values likewise in the context of neural 
+networks each weight starts out as a 
+random number 
+but when we train the Transformer by 
+getting it to predict words in known 
+documents back propagation optimizes 
+these values one step at a time and 
+results in these final weights also just 
+to be clear the process of optimizing 
+the weights is also called training bam 
+note there's a lot more to be said about 
+training and back propagation so if 
+you're interested check out the quests 
+anyway we now know how to calculate the 
+word embedding values for the first word 
+in our phrase what 
+so we'll keep track of those values with 
+this diagram in the upper right hand 
+corner now we reuse the exact same word 
+embedding Network to convert the 
+remaining words in the prompt what is 
+statquest into numbers thus the word 
+embedding values for is are 0.61 and 
+0.17 and the word embedding values for 
+statquest are negative 2.38 and 0.10 
+and now we have converted all of the 
+words in the prompt what is stackquest 
+into word embedding values 
+note reusing the exact same word 
+embedding Network for each word in the 
+prompt allows the decoder only 
+Transformer to handle prompts that have 
+different lengths because we can just 
+copy the network as many times as we 
+need to convert all the words in the 
+prompt into numbers 
+also note there's a lot more to say 
+about word embedding so if you're 
+interested check out the quest 
+anyway now that we know how to convert 
+words into numbers 
+let's talk about word order 
+for example if Norm said 
+Squatch eats Pizza 
+then squash might say 
+yum 
+in contrast if Norm said 
+Pizza eats squash 
+then Squatch might say yikes 
+so these two phrases Squatch eats Pizza 
+and pizza eats squash use the exact same 
+words but have very different meanings 
+so keeping track of word order is super 
+important 
+so let's talk about positional encoding 
+which is a technique that Transformers 
+use to keep track of word order 
+although there are several ways to keep 
+track of word order with positional 
+encoding one of the most commonly used 
+methods uses a sequence of alternating 
+sine and cosine squiggles each squiggle 
+gives a specific position values for 
+each word's embeddings 
+so now let's see how we can add 
+positional encoding values to the word 
+embeddings we created for the prompt 
+what is statquest 
+the first word which in this case is 
+what has an x-axis coordinate all the 
+way to the left on the green squiggle 
+and the position value for its first 
+embedding is the y-axis coordinate zero 
+the position value for the second 
+embedding comes from the orange squiggle 
+and the y-axis coordinate on the orange 
+squiggle that corresponds to the first 
+word is one 
+now to get the position values for the 
+second word is 
+we simply use the y-axis coordinates on 
+the squiggles that correspond to the 
+x-axis coordinate for the second word 
+likewise we use the corresponding y-axis 
+coordinates for the third word statquest 
+note because the sine and cosine 
+squiggles are repetitive it's possible 
+that two words might get the same 
+position or y-axis values 
+however because the squiggles get wider 
+for larger embedding positions 
+and the more embedding values we have 
+then the wider the squiggles get 
+then even with a repeat value here and 
+there we end up with a unique sequence 
+of position values for each word anyway 
+now we just do the math to get the 
+positional and coding for all three 
+input words and we end up with the word 
+embeddings plus positional encoding for 
+the prompt what is statquest now because 
+we're going to need all the space we can 
+get let's consolidate the math and the 
+diagrams and let the sine and cosine and 
+plus symbols represent the positional 
+encoding now that we know how to keep 
+track of each word's position 
+let's talk about how a decoder only 
+Transformer keeps track of the 
+relationships among words 
+for example if the prompt was 
+the pizza came out of the oven and it 
+tasted good 
+then this word it could refer to Pizza 
+or potentially it could refer to the 
+word oven 
+Josh I've heard of good tasting pizza 
+but never a good tasting oven 
+I know Squatch that's why it's super 
+important that the decoder only 
+Transformer correctly Associates the 
+word it with pizza the good news is that 
+decoder only Transformers have something 
+called masked self-attention which can 
+help correctly associate the word ID 
+with the word Pizza 
+in general terms mask self-attention 
+works by seeing how similar each word is 
+to itself and all of the preceding words 
+in the sentence 
+for example mask self-attention starts 
+by calculating the similarity between 
+the first word the and itself 
+then masked self-attention calculates 
+the similarity between pizza and itself 
+and the preceding word the 
+and then masked self-attention just 
+keeps calculating similarities like this 
+allowing each word to look at itself and 
+the words that came before it but not 
+after until it gets to the end of the 
+input 
+once the similarities are calculated 
+they are used to determine how the 
+decoder only Transformer encodes each 
+word 
+for example if you looked at a lot of 
+sentences about pizza and the word it 
+was more commonly associated with pizza 
+than oven 
+then the similarity score for pizza will 
+cause it to have a larger impact on how 
+the word ID is encoded by the decoder 
+only Transformer 
+oh no it's the dreaded terminology alert 
+because masked self-attention only 
+allows access to the words that come 
+before it 
+and not the words that come after 
+it is sometimes called an auto 
+regressive method anyway now that we 
+know the main ideas of how masked 
+self-attention Works let's look at the 
+details 
+so let's go back to our simple example 
+where we had just added positional 
+encoding to The Prompt what is statquest 
+now since what is the first word in the 
+prompt it's masked self-attention values 
+will only reflect its similarity to 
+itself 
+and ignore everything else 
+in contrast the masked self-attention 
+values for the second word is 
+reflect the similarity to itself 
+as well as a similarity with the first 
+word what and the last word stat Quest 
+takes into account its similarity with 
+itself and everything that came before 
+it 
+now I know that what is the first word 
+in the input 
+but it will make it easier to understand 
+how masked self-attention works if we 
+start with the second word is 
+so let's move the position encoded is 
+over a little bit to give us some room 
+the first thing we do to calculate the 
+masked self-attention for the word is is 
+multiply its position and coded values 
+by a pair of weights and then add those 
+products together to get Negative 2.4 
+then we do the same thing with a 
+different pair of weights 
+to get 2.6 
+we do this twice because we started out 
+with two position encoded values that 
+represent the word is 
+and after doing the math two times we 
+still have two values representing the 
+word is 
+Josh I don't get it if we want two 
+values to represent is why don't we just 
+use the two values we started with 
+that's a great question Squatch and 
+we'll answer it 
+in a little bit grr 
+anyway for now just know that we have 
+two new values to represent the word is 
+and in Transformer terminology we call 
+them query numbers 
+and now we're going to use the query 
+numbers for is to calculate the 
+similarities with itself and the first 
+word what and we do that by creating two 
+new numbers like we did before to 
+represent the word is 
+and creating two new numbers to 
+represent the word what 
+in Transformer terminology both sets of 
+new numbers are called key values and we 
+use them to calculate similarities with 
+the query for is 
+one way to calculate similarities 
+between the query and the keys is to 
+calculate something called a DOT product 
+for example in order to calculate the 
+dot product similarity between the query 
+and key for is we simply multiply each 
+pair of numbers together 
+and add the products to get 5.9 
+likewise we can calculate the dot 
+product similarity between the query for 
+is and the key for what 
+by multiplying the pairs of numbers 
+together 
+and adding the products to get Negative 
+25.7 
+the small similarity value for what 
+relative to is a negative 25.7 compared 
+to the large similarity value for is 
+relative to itself 5.9 tells us that is 
+is much more similar to itself than it 
+is to the word what 
+that said if you remember the example 
+where the word it could relate to pizza 
+or oven then the word ID should have a 
+relatively large similarity value with 
+respect to the word Pizza since it 
+refers to pizza and not oven 
+note there's a lot to be said about 
+calculating similarities in this context 
+and the dot product so if you're 
+interested check out the quests anyway 
+since is is much more similar to itself 
+than it is to the word what then we want 
+is to have more influence on its 
+encoding than the word what 
+and we do this by first running the 
+similarities course through something 
+called a soft Max function the main idea 
+of a softmax function is that it 
+preserves the order of the input values 
+from low to high and translates them 
+into numbers between 0 and 1 that add up 
+to one 
+so we can think of the output of the 
+softmax function as a way to determine 
+what percentage of each input word we 
+should use to encode the word is 
+in this case because is is so much more 
+similar to itself than the word what 
+we'll use 100 of the word is to encode 
+is and zero percent of the word what to 
+encode the word is 
+note there's a lot more to be said about 
+the soft Max function so if you're 
+interested check out the quest anyway 
+because we want 100 of the word is to 
+encode is and zero percent of the word 
+what to encode is 
+we create two more numbers that will 
+cleverly call values to represent the 
+word what and scale them by 0.0 then we 
+create two value numbers to represent 
+the word is and scale them by 1.0 lastly 
+we add the scaled values together and 
+these sums which combine separate 
+encodings for both input words what and 
+is relative to their similarity to is 
+are the masked self-attention values for 
+is 
+bam now that we have the masked 
+self-attention values for is 
+we can go back and calculate them for 
+the first word what 
+remember because what is the first word 
+it only needs to know how similar it is 
+to itself 
+so we can get rid of most of what we did 
+for the word is but keep the key and 
+value numbers that we calculated for the 
+word what 
+now so we have a little more room to 
+work let's move everything over a bit 
+and just like we did before we create a 
+query for the word what now we use the 
+query and key for what to calculate the 
+similarity with itself and we get 
+Negative 12.4 
+so we plug negative 12.4 into the soft 
+Max function 
+and we get 1.0 
+lastly we scale the value numbers for 
+what by 1.0 
+and negative 2.9 and negative 1.3 are 
+the masked self-attention values for the 
+first word what 
+it might seem a little silly to do all 
+this math just to end up using the value 
+numbers for what as the masked 
+self-attention numbers for what 
+however doing it this way gives us a 
+unified method for calculating masked 
+self-attention 
+so so far we've calculated the masked 
+self-attention values for what 
+which only required taking its own value 
+numbers into account 
+and we calculated the massed 
+self-attention for is 
+which required taking the value numbers 
+from what and is into account 
+now we need to calculate the masked 
+self-attention for the third word 
+statquest and that means we need to take 
+the value numbers for statquest into 
+account which we calculate like before 
+and we need to take the value numbers 
+for what and is into account 
+so the first thing we do is calculate 
+the query numbers for the word statquest 
+and then calculate its key numbers and 
+then we bring back the keys for what and 
+is and calculate the similarities 
+between the query for statquest and the 
+keys for statquest is and what 
+now we run all three similarities into 
+the soft Max function and the output 
+from the softmax tells us what 
+percentage of each word's value numbers 
+to use when calculating the massed 
+self-attention for statquest now we 
+bring back the value numbers that we 
+calculated earlier for what is and 
+statquest and scale them based on the 
+similarity scores 
+lastly we add the pairs of scaled values 
+together to get the masked 
+self-attention numbers for the word stat 
+Quest 
+bam 
+note before we move on I want to point 
+out that we reuse one set of weights to 
+create query numbers for each word 
+in other words the set of Weights we use 
+to create the query numbers for what 
+is the same set of Weights we use for 
+the query numbers for is in statquest 
+likewise the key numbers are calculated 
+with a different set of Weights that are 
+shared for each word 
+and the value numbers are also 
+calculated with another set of Weights 
+that are reused for each word 
+reusing the sets of weights for the 
+query key and value numbers lets the 
+decoder only Transformer handle prompts 
+that have different lengths because we 
+can just keep reusing the weights as 
+many times as we need 
+now that we understand the details of 
+how masked self-attention Works let's 
+shrink the diagram so that we can keep 
+building our decoder only Transformer 
+bam 
+Josh you forgot something if we want two 
+values to represent what why don't we 
+just use the two position encoded values 
+we started with 
+first the new masked self-attention 
+values for each word contain input from 
+all of the other words that came earlier 
+and this helps give each word context 
+and this can help establish how each 
+word in the input prompt is related to 
+the others 
+also if we can think of this unit with 
+its three sets of weights for 
+calculating queries keys and values as a 
+masked self-attention cell then in order 
+to correctly establish how words are 
+related in complicated sentences and 
+paragraphs we can create a stack of 
+masked self-attention cells each with 
+its own sets of Weights that we apply to 
+the position encoded values for each 
+word to capture different relationships 
+among the words 
+in the manuscript that first described 
+the original GPT they stacked 12 masked 
+self-attention cells damn 
+okay going back to our simple example 
+with only one masked self-attention cell 
+there are a few more things we need to 
+do before we start generating a response 
+to the prompt what is statquest 
+First We Take the position encoded 
+values 
+and add them to the self-attention 
+values these bypasses are called 
+residual connections and they make it 
+easier to train complex neural networks 
+by allowing the masked self-attention 
+layer to establish relationships among 
+the input words without having to also 
+preserve the word embedding and position 
+encoding information bam lastly we need 
+a way to use the encodings we have for 
+each word in the prompt to generate the 
+word that follows it and then generate a 
+response in other words we want to use 
+these two numbers that represent the 
+word what to generate the word that 
+comes after what 
+and we want these two numbers that 
+represent the word is to generate the 
+word that comes after is 
+lastly we want these two numbers that 
+represent the word stat quest to 
+generate the word that comes after 
+statquest 
+hey Josh I don't get it 
+why do we want to generate the word that 
+comes after what 
+when we already know the next word is 
+because this is a decoder only 
+Transformer we need one thing that can 
+both encode The Prompt and generate the 
+output 
+thus even though we are not yet 
+generating a response we need to include 
+the parts that will do it 
+also we can compare the known input to 
+what the model generates when we train 
+the model 
+so now let's see what the model 
+generates given the first word in the 
+prompt what and that means taking these 
+two values and negative 5.28 and 
+negative 0.2 and plugging them into 
+something called a fully connected layer 
+this fully connected layer has one input 
+for each value that represents the 
+current token so in this case we have 
+two inputs and one output for each token 
+in the vocabulary which in this case 
+means five outputs note a fully 
+connected layer is just a simple neural 
+network with weights numbers we multiply 
+the inputs by and biases numbers we add 
+to the sums of the products also note in 
+the original GPT manuscript instead of a 
+new fully connected layer they use the 
+word embedding Network that we started 
+with but in reverse 
+in other words they just reuse the same 
+set of Weights that we use to encode the 
+words into numbers and then flip them to 
+help decode the numbers 
+however not all decoder only 
+Transformers do it this way 
+in a very common alternative is a fully 
+connected layer 
+small bam now when we do the math we get 
+five output values 
+which we run through a final soft Max 
+function to generate the next word is 
+and since the prompt was what is 
+statquest the model generated the 
+correct word 
+bam 
+the second word in the prompt is is and 
+it generates 
+the word what which is not correct 
+however the correct word stat Quest was 
+almost correctly generated so we hope 
+our model doesn't feel too much shame 
+note if we were training the decoder 
+only Transformer then we would use the 
+fact that we made a mistake to modify 
+the weights and biases 
+in contrast when we are just using the 
+model to generate responses then it 
+really doesn't matter what words come 
+out right now 
+so in this case we'll just note that we 
+made a mistake and move on 
+lastly the word stat Quest generates 
+the EOS token which is correct since we 
+are at the end of The Prompt bam 
+now let's review what we've done so far 
+we started with an input prompt what is 
+stackquest and we used word embedding to 
+convert each word into numbers and we 
+used positional encoding to keep track 
+of word order in the prompt then we 
+added masked self-attention to determine 
+the relationships among the words in the 
+prompt then we added residual 
+connections to make it easier to train 
+the model 
+lastly we added a fully connected layer 
+and a soft Max to generate the next word 
+each part of the decoder only 
+Transformer is reused so that it can 
+handle prompts of different lengths 
+and the encoding for each word in the 
+prompt can happen at the same time 
+rather than sequentially and thus can be 
+done quickly when multiple Computing 
+cores are available 
+lastly generating the output uses the 
+exact same steps that we use to encode 
+the prompt thus generating the output 
+starts with word embedding and it uses 
+the exact same word embedding Network 
+that we use to encode The Prompt and 
+because we just finished encoding The 
+Prompt we start generating the output 
+from the EOS token in this case we're 
+using the EOS token to start generating 
+the output because that is a common way 
+to initialize this process 
+however sometimes you'll see people use 
+SOS for startup sentence or start of 
+sequence to initialize the process 
+Josh starting with SOS makes more sense 
+to me 
+then you can do it that way Squatch I'm 
+just saying that a lot of people start 
+with EOS 
+also note we will start with the EOS 
+token regardless of whether or not it 
+was the last token generated when we 
+encoded The Prompt anyway we plug in 1 
+for Eos and zero for everything else 
+and we end up with the numbers that 
+represent the EOS token now let's shrink 
+the word embedding down to make more 
+space so that we can add positional 
+encoding 
+note the EOS token comes after the three 
+tokens that represent the input so it's 
+in the fourth position 
+and since the EOS token is in the fourth 
+position with two embeddings we just add 
+those two position values and before we 
+move on we need to say a few more words 
+about masked self-attention 
+so far we've talked about how masked 
+self-attention helps the decoder only 
+Transformer keep track of how words are 
+related within the input 
+however it's also important to keep 
+track of the relationships between the 
+input sentence and the output 
+for example if the input sentence was 
+don't eat the delicious looking and 
+smelling Pizza 
+then when generating new output it is 
+super important to keep track of the 
+very first word don't if we focus on 
+other parts of the sentence and omit the 
+don't then we'll end up with 
+eat the delicious looking and smelling 
+Pizza 
+and these two sentences have completely 
+opposite meanings so it's super 
+important that when generating the 
+output we keep track of the significant 
+words in the input 
+the nice thing is that all we have to do 
+to add this ability to our decoder only 
+Transformer is just include the prompt 
+when we do Mass self-attention while 
+generating the output 
+so the first thing we do is calculate 
+the query numbers for the EOS token and 
+then we calculate the key numbers using 
+the same sets of Weights we used for the 
+prompt and then we bring back the key 
+values for the prompt what is statquest 
+then we calculate the similarities 
+between the query and the keys 
+and run everything through the softmax 
+function 
+now we calculate the value numbers for 
+the EOS token and bring back all of the 
+value numbers we calculated earlier 
+and scale all of them based on the 
+similarity scores 
+lastly we add the pairs of scaled values 
+together to get the masked 
+self-attention values for the EOS token 
+bam 
+anyway now that we have the masked 
+self-attention values for the EOS token 
+we add the residual connections 
+Now we move the diagram to the left and 
+run the numbers that represent the EOS 
+token through the same fully connected 
+layer we used earlier and the same soft 
+Max function we used before and the 
+first word generated by our decoder only 
+Transformer is awesome which is totally 
+awesome 
+however even though the output is 
+awesome we're not done yet because the 
+decoder only Transformer will keep 
+generating output until it generates the 
+EOS token so we plug the word we just 
+generated awesome into another copy of 
+the word embedding layer then we add the 
+position on encoding using the values 
+for the fifth position because now the 
+sequence is what is statquest eos 
+awesome now we calculate the masked 
+self-attention values 
+[Music] 
+now that we have the masked 
+self-attention values for awesome 
+we add the residual connections 
+Now we move the diagram to the left and 
+run the numbers that represent awesome 
+through the same fully connected layer 
+we used earlier 
+and the same soft Max function we used 
+before 
+and our decoder only Transformer 
+generates the EOS token which means we 
+are done generating output 
+double bam 
+now let's talk about the differences 
+between the decoder only Transformer 
+that we just learned about in a basic 
+Transformer 
+as we just saw a decoder only 
+Transformer uses the exact same 
+components to encode The Prompt that it 
+uses to generate the output 
+and it uses masked self-attention which 
+is calculated with only the current word 
+in everything that preceded it and the 
+masked self-attention is applied equally 
+to the input prompt and to the output 
+that is generated 
+masked self-attention allows a 
+decoder-only Transformer to determine 
+how words in the prompt are related and 
+make sure that it keeps track of 
+important input words when generating 
+the output 
+in contrast a regular Transformer uses 
+one type of unit called the encoder to 
+encode The Prompt in a different type of 
+unit called the decoder to generate the 
+output 
+when encoding the input prompt instead 
+of using masked self-attention a normal 
+Transformer uses self-attention which 
+includes all of the words in the input 
+not just the ones that came before to 
+determine how the words are related to 
+each other 
+and a normal Transformer uses encoder 
+decoder attention to let the decoder 
+keep track of important words in the 
+input 
+encoder decoder attention uses queries 
+from the decoder but only keys and 
+values from the encoder 
+now so far we've only talked about how 
+attention is used in a normal 
+Transformer during inference when it 
+encodes the input and generates new 
+output 
+however during training a normal 
+Transformer uses mask self-attention in 
+the decoder 
+for example during training we know the 
+output should be awesome EOS 
+which means we don't have to decode the 
+initial EOS before we decode awesome 
+like we do when we are generating new 
+output 
+instead since we know we will be 
+decoding awesome we can do its math at 
+the same time we do the math for the EOS 
+token doing the math at the same time 
+means we can train faster 
+and thus during training a normal 
+Transformer will use masked 
+self-attention on the tokens in the 
+known output 
+this allows the Transformer to learn how 
+to generate the correct output without 
+cheating and looking ahead note when we 
+are training a normal Transformer the 
+Mast self-attention only includes the 
+output tokens in contrast a decoder-only 
+Transformer uses massed self-attention 
+all of the time not just during training 
+and it includes the input and the output 
+bam so the three big differences between 
+a normal Transformer and a decoder only 
+Transformer are 
+a normal Transformer uses one unit to 
+encode the input called the encoder and 
+a separate unit to generate the output 
+called the decoder and a normal 
+Transformer uses two types of attention 
+during inference self-attention and 
+encoder decoder attention 
+lastly during training a normal 
+Transformer uses massed self-attention 
+but only on the output 
+in contrast a decoder only Transformer 
+has a single unit for both encoding the 
+input and generating the output 
+and a decoder only Transformer uses a 
+single type of attention masked 
+self-attention 
+and a decoder only Transformer uses mask 
+self-attention all the time on 
+everything the input and the output 
+triple bam 
+note there's a lot more to say about 
+normal encoder decoder Transformers so 
+if you're interested check out the quest 
+now it's time for some 
+Shameless self-promotion if you want to 
+review statistics and machine learning 
+offline check out the statquest PDF 
+study guides in my book The stackquest 
+Illustrated guide to machine learning at 
+stackquest.org there's something for 
+everyone 
+hooray we've made it to the end of 
+another exciting stat Quest if you like 
+this stat Quest and want to see more 
+please subscribe and if you want to 
+support stackquest consider contributing 
+to my patreon campaign becoming a 
+channel member buying one or two of my 
+original songs or a t-shirt or a hoodie 
+or just donate the links are in the 
+description below alright until next 
+time Quest on 
